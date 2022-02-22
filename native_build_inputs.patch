@@ -1,0 +1,1662 @@
+From d22df66effd0393cea6c7f7b7c991f6cc02bbcaa Mon Sep 17 00:00:00 2001
+From: Ulrik Strid <ulrik.strid@outlook.com>
+Date: Tue, 22 Feb 2022 10:59:04 +0100
+Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
+ nativeBuildInputs
+
+---
+ pkgs/development/ocaml-modules/apron/default.nix            | 3 ++-
+ pkgs/development/ocaml-modules/astring/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/atd/default.nix              | 2 +-
+ pkgs/development/ocaml-modules/bap/default.nix              | 5 ++---
+ pkgs/development/ocaml-modules/batteries/default.nix        | 2 +-
+ pkgs/development/ocaml-modules/benchmark/default.nix        | 3 ++-
+ pkgs/development/ocaml-modules/biniou/1.0.nix               | 3 ++-
+ pkgs/development/ocaml-modules/bitv/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/bolt/default.nix             | 3 ++-
+ pkgs/development/ocaml-modules/bz2/default.nix              | 3 ---
+ pkgs/development/ocaml-modules/calendar/default.nix         | 2 +-
+ pkgs/development/ocaml-modules/camlpdf/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/camlzip/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/camomile/0.8.2.nix           | 3 ++-
+ pkgs/development/ocaml-modules/camomile/0.8.5.nix           | 3 ++-
+ pkgs/development/ocaml-modules/cil/default.nix              | 2 +-
+ pkgs/development/ocaml-modules/config-file/default.nix      | 3 ++-
+ pkgs/development/ocaml-modules/cpdf/default.nix             | 3 ++-
+ pkgs/development/ocaml-modules/cryptgps/default.nix         | 2 +-
+ pkgs/development/ocaml-modules/csv/1.5.nix                  | 2 +-
+ pkgs/development/ocaml-modules/ctypes/default.nix           | 4 ++--
+ pkgs/development/ocaml-modules/dolog/default.nix            | 2 +-
+ pkgs/development/ocaml-modules/dum/default.nix              | 2 +-
+ pkgs/development/ocaml-modules/dypgen/default.nix           | 2 +-
+ pkgs/development/ocaml-modules/elina/default.nix            | 2 +-
+ pkgs/development/ocaml-modules/eliom/default.nix            | 6 ++++--
+ pkgs/development/ocaml-modules/enumerate/default.nix        | 2 +-
+ pkgs/development/ocaml-modules/erm_xml/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/erm_xmpp/default.nix         | 3 ++-
+ pkgs/development/ocaml-modules/expat/0.9.nix                | 3 ++-
+ pkgs/development/ocaml-modules/expat/default.nix            | 3 ++-
+ pkgs/development/ocaml-modules/extlib/default.nix           | 2 +-
+ pkgs/development/ocaml-modules/farfadet/default.nix         | 2 +-
+ pkgs/development/ocaml-modules/fontconfig/default.nix       | 4 ++--
+ pkgs/development/ocaml-modules/fpath/default.nix            | 2 +-
+ pkgs/development/ocaml-modules/frontc/default.nix           | 2 +-
+ pkgs/development/ocaml-modules/functory/default.nix         | 2 +-
+ pkgs/development/ocaml-modules/getopt/default.nix           | 2 +-
+ pkgs/development/ocaml-modules/gg/default.nix               | 2 +-
+ pkgs/development/ocaml-modules/gmetadom/default.nix         | 4 ++--
+ pkgs/development/ocaml-modules/hacl-star/default.nix        | 2 +-
+ pkgs/development/ocaml-modules/hmap/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/inifiles/default.nix         | 2 +-
+ pkgs/development/ocaml-modules/inotify/default.nix          | 3 ++-
+ pkgs/development/ocaml-modules/iso8601/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/javalib/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/lablgl/default.nix           | 3 ++-
+ pkgs/development/ocaml-modules/lablgtk-extras/1.4.nix       | 3 ++-
+ pkgs/development/ocaml-modules/lablgtk-extras/default.nix   | 3 ++-
+ pkgs/development/ocaml-modules/lablgtk/2.14.0.nix           | 4 ++--
+ pkgs/development/ocaml-modules/lablgtk/default.nix          | 4 ++--
+ pkgs/development/ocaml-modules/labltk/default.nix           | 3 ++-
+ pkgs/development/ocaml-modules/llvm/default.nix             | 4 ++--
+ pkgs/development/ocaml-modules/lua-ml/default.nix           | 3 +--
+ pkgs/development/ocaml-modules/macaque/default.nix          | 3 ++-
+ pkgs/development/ocaml-modules/magick/default.nix           | 4 ++--
+ pkgs/development/ocaml-modules/mlgmp/default.nix            | 3 ++-
+ pkgs/development/ocaml-modules/mlgmpidl/default.nix         | 3 ++-
+ pkgs/development/ocaml-modules/mysql/default.nix            | 2 +-
+ pkgs/development/ocaml-modules/nocrypto/default.nix         | 4 ++--
+ pkgs/development/ocaml-modules/notty/default.nix            | 3 ++-
+ pkgs/development/ocaml-modules/num/default.nix              | 1 -
+ pkgs/development/ocaml-modules/ocaml-cairo/default.nix      | 5 ++---
+ pkgs/development/ocaml-modules/ocaml-libvirt/default.nix    | 4 +---
+ pkgs/development/ocaml-modules/ocamlnat/default.nix         | 3 ++-
+ pkgs/development/ocaml-modules/ocamlnet/default.nix         | 4 ++--
+ pkgs/development/ocaml-modules/ocamlsdl/default.nix         | 4 ++--
+ pkgs/development/ocaml-modules/ocb-stubblr/default.nix      | 2 +-
+ pkgs/development/ocaml-modules/ocp-ocamlres/default.nix     | 3 ++-
+ pkgs/development/ocaml-modules/ocplib-simplex/default.nix   | 3 +--
+ pkgs/development/ocaml-modules/ocsigen-deriving/default.nix | 3 ++-
+ pkgs/development/ocaml-modules/ocsigen-start/default.nix    | 2 +-
+ pkgs/development/ocaml-modules/ocsigen-toolkit/default.nix  | 2 +-
+ pkgs/development/ocaml-modules/ocurl/default.nix            | 4 +++-
+ pkgs/development/ocaml-modules/odn/default.nix              | 3 ++-
+ pkgs/development/ocaml-modules/omd/default.nix              | 2 +-
+ pkgs/development/ocaml-modules/otfm/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/piqi-ocaml/default.nix       | 3 ++-
+ pkgs/development/ocaml-modules/piqi/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/ppx_cstubs/default.nix       | 3 ++-
+ pkgs/development/ocaml-modules/ppx_tools/default.nix        | 1 -
+ pkgs/development/ocaml-modules/pycaml/default.nix           | 3 ++-
+ pkgs/development/ocaml-modules/pyml/default.nix             | 4 +++-
+ pkgs/development/ocaml-modules/react/default.nix            | 2 +-
+ pkgs/development/ocaml-modules/reactivedata/default.nix     | 2 +-
+ pkgs/development/ocaml-modules/rope/default.nix             | 3 ++-
+ pkgs/development/ocaml-modules/rresult/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/sawja/default.nix            | 4 +---
+ pkgs/development/ocaml-modules/sedlex/default.nix           | 2 +-
+ pkgs/development/ocaml-modules/sodium/default.nix           | 2 +-
+ pkgs/development/ocaml-modules/sosa/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/sqlite3EZ/default.nix        | 3 ++-
+ pkgs/development/ocaml-modules/stdcompat/default.nix        | 2 +-
+ pkgs/development/ocaml-modules/tezos/legacy-store.nix       | 2 +-
+ pkgs/development/ocaml-modules/tezos/lmdb.nix               | 2 +-
+ .../ocaml-modules/tezos/protocol-010-PtGRANAD.nix           | 2 +-
+ .../ocaml-modules/tezos/protocol-011-PtHangz2.nix           | 2 +-
+ pkgs/development/ocaml-modules/tezos/store.nix              | 2 +-
+ pkgs/development/ocaml-modules/tezos/validation.nix         | 2 +-
+ pkgs/development/ocaml-modules/tsdl/default.nix             | 3 +--
+ pkgs/development/ocaml-modules/twt/default.nix              | 2 +-
+ pkgs/development/ocaml-modules/type_conv/108.08.00.nix      | 3 ++-
+ pkgs/development/ocaml-modules/type_conv/109.60.01.nix      | 3 ++-
+ pkgs/development/ocaml-modules/uchar/default.nix            | 1 -
+ pkgs/development/ocaml-modules/ulex/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/uucd/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/uucp/default.nix             | 3 ++-
+ pkgs/development/ocaml-modules/uunf/default.nix             | 3 ++-
+ pkgs/development/ocaml-modules/uuseg/default.nix            | 3 ++-
+ pkgs/development/ocaml-modules/vg/default.nix               | 2 +-
+ pkgs/development/ocaml-modules/xml-light/default.nix        | 2 +-
+ pkgs/development/ocaml-modules/xmlm/default.nix             | 2 +-
+ 112 files changed, 161 insertions(+), 136 deletions(-)
+
+diff --git a/pkgs/development/ocaml-modules/apron/default.nix b/pkgs/development/ocaml-modules/apron/default.nix
+index c9edfd62e06d9..44f71ceb542e1 100644
+--- a/pkgs/development/ocaml-modules/apron/default.nix
++++ b/pkgs/development/ocaml-modules/apron/default.nix
+@@ -10,7 +10,8 @@ stdenv.mkDerivation rec {
+     sha256 = "14ymjahqdxj26da8wik9d5dzlxn81b3z1iggdl7rn2nn06jy7lvy";
+   };
+ 
+-  buildInputs = [ perl gmp mpfr ppl ocaml findlib camlidl ];
++  nativeBuildInputs = [ ocaml findlib perl ];
++  buildInputs = [ gmp mpfr ppl camlidl ];
+   propagatedBuildInputs = [ mlgmpidl ];
+ 
+   outputs = [ "out" "bin" "dev" ];
+diff --git a/pkgs/development/ocaml-modules/astring/default.nix b/pkgs/development/ocaml-modules/astring/default.nix
+index 8ecac1c124d6c..d08bea75bc5c1 100644
+--- a/pkgs/development/ocaml-modules/astring/default.nix
++++ b/pkgs/development/ocaml-modules/astring/default.nix
+@@ -22,7 +22,7 @@ stdenv.mkDerivation {
+     inherit (param) sha256;
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   inherit (topkg) buildPhase installPhase;
+ 
+diff --git a/pkgs/development/ocaml-modules/atd/default.nix b/pkgs/development/ocaml-modules/atd/default.nix
+index de6ade61518a7..ec7b51d823eac 100644
+--- a/pkgs/development/ocaml-modules/atd/default.nix
++++ b/pkgs/development/ocaml-modules/atd/default.nix
+@@ -13,7 +13,7 @@ buildDunePackage rec {
+     sha256 = "17jm79np69ixp53a4njxnlb1pg8sd1g47nm3nyki9clkc8d4qsyv";
+   };
+ 
+-  buildInputs = [ which menhir ];
++  nativeBuildInputs = [ which menhir ];
+   propagatedBuildInputs = [ easy-format re ];
+ 
+   doCheck = true;
+diff --git a/pkgs/development/ocaml-modules/bap/default.nix b/pkgs/development/ocaml-modules/bap/default.nix
+index f8e07fd1265cb..ea009083e8d17 100644
+--- a/pkgs/development/ocaml-modules/bap/default.nix
++++ b/pkgs/development/ocaml-modules/bap/default.nix
+@@ -36,10 +36,9 @@ stdenv.mkDerivation rec {
+     export CAML_LD_LIBRARY_PATH="''${CAML_LD_LIBRARY_PATH-}''${CAML_LD_LIBRARY_PATH:+:}''$1/lib/ocaml/${ocaml.version}/site-lib/ocaml${ocaml.version}-bap-${version}-llvm-plugins/"
+   '';
+ 
+-  nativeBuildInputs = [ which makeWrapper ];
++  nativeBuildInputs = [ which makeWrapper ocaml findlib ocamlbuild ocaml_oasis ];
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ocaml_oasis
+-                  linenoise
++  buildInputs = [ linenoise
+                   ounit
+                   ppx_bitstring
+                   z3
+diff --git a/pkgs/development/ocaml-modules/batteries/default.nix b/pkgs/development/ocaml-modules/batteries/default.nix
+index 69e8289df2cd7..1bd478f5cb0ad 100644
+--- a/pkgs/development/ocaml-modules/batteries/default.nix
++++ b/pkgs/development/ocaml-modules/batteries/default.nix
+@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256:1cd7475n1mxhq482aidmhh27mq5p2vmb8d9fkb1mlza9pz5z66yq";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+   checkInputs = [ qtest ];
+   propagatedBuildInputs = [ num ];
+ 
+diff --git a/pkgs/development/ocaml-modules/benchmark/default.nix b/pkgs/development/ocaml-modules/benchmark/default.nix
+index 3397821319e32..a737920903ae2 100644
+--- a/pkgs/development/ocaml-modules/benchmark/default.nix
++++ b/pkgs/development/ocaml-modules/benchmark/default.nix
+@@ -9,7 +9,8 @@ stdenv.mkDerivation rec {
+     sha256 = "16wi8ld7c3mq77ylpgbnj8qqqqimyzwxs47v06vyrwpma5pab5xa";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ocaml_pcre ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ ocaml_pcre ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/biniou/1.0.nix b/pkgs/development/ocaml-modules/biniou/1.0.nix
+index 795e634012901..52ceeb7372a74 100644
+--- a/pkgs/development/ocaml-modules/biniou/1.0.nix
++++ b/pkgs/development/ocaml-modules/biniou/1.0.nix
+@@ -16,7 +16,8 @@ stdenv.mkDerivation rec {
+     sha256 = "14j3hrhbjqxbizr1pr8fcig9dmfzhbjjwzwyc99fcsdic67w8izb";
+   };
+ 
+-  buildInputs = [ ocaml findlib easy-format ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ easy-format ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/bitv/default.nix b/pkgs/development/ocaml-modules/bitv/default.nix
+index 2ac3a0ba3e76b..166eaf7620490 100644
+--- a/pkgs/development/ocaml-modules/bitv/default.nix
++++ b/pkgs/development/ocaml-modules/bitv/default.nix
+@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-sZwq6c10hBBS9tGvKlWD9GE3JBrZPByfDrXE6xIPcG4=";
+   };
+ 
+-  buildInputs = [ autoreconfHook which ocaml findlib ];
++  nativeBuildInputs = [ autoreconfHook which ocaml findlib ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/bolt/default.nix b/pkgs/development/ocaml-modules/bolt/default.nix
+index a6b63676e775c..bc453653c633b 100644
+--- a/pkgs/development/ocaml-modules/bolt/default.nix
++++ b/pkgs/development/ocaml-modules/bolt/default.nix
+@@ -18,7 +18,8 @@ stdenv.mkDerivation rec {
+     sha256 = "1c807wrpxra9sbb34lajhimwra28ldxv04m570567lh2b04n38zy";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild which camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild which ];
++  buildInputs = [ camlp4 ];
+ 
+   patches = [
+     (fetchpatch {
+diff --git a/pkgs/development/ocaml-modules/bz2/default.nix b/pkgs/development/ocaml-modules/bz2/default.nix
+index 617715fc6edcd..08e80b10da666 100644
+--- a/pkgs/development/ocaml-modules/bz2/default.nix
++++ b/pkgs/development/ocaml-modules/bz2/default.nix
+@@ -19,9 +19,6 @@ stdenv.mkDerivation rec {
+ 
+   nativeBuildInputs = [
+     autoreconfHook
+-  ];
+-
+-  buildInputs = [
+     ocaml
+     findlib
+   ];
+diff --git a/pkgs/development/ocaml-modules/calendar/default.nix b/pkgs/development/ocaml-modules/calendar/default.nix
+index 29927aae04a7e..e3d44341b3b1d 100644
+--- a/pkgs/development/ocaml-modules/calendar/default.nix
++++ b/pkgs/development/ocaml-modules/calendar/default.nix
+@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
+     sha256 = "04pvhwb664g3s644c7v7419a3kvf5s3pynkhmk5j59dvlfm1yf0f";
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/camlpdf/default.nix b/pkgs/development/ocaml-modules/camlpdf/default.nix
+index 42c27f15a5b1b..3b93abdaebe20 100644
+--- a/pkgs/development/ocaml-modules/camlpdf/default.nix
++++ b/pkgs/development/ocaml-modules/camlpdf/default.nix
+@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256:1qmsa0xgi960y7r20mvf8hxiiml7l1908s4dm7nq262f19w51gsl";
+   };
+ 
+-  buildInputs = [ which ocaml findlib ];
++  nativeBuildInputs = [ which ocaml findlib ];
+ 
+   preInstall = ''
+     mkdir -p $out/lib/ocaml/${ocaml.version}/site-lib/stublibs
+diff --git a/pkgs/development/ocaml-modules/camlzip/default.nix b/pkgs/development/ocaml-modules/camlzip/default.nix
+index c2c2e98b2e063..f079c93ce2722 100644
+--- a/pkgs/development/ocaml-modules/camlzip/default.nix
++++ b/pkgs/development/ocaml-modules/camlzip/default.nix
+@@ -33,7 +33,7 @@ stdenv.mkDerivation {
+     inherit (param) sha256;
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   propagatedBuildInputs = [zlib];
+ 
+diff --git a/pkgs/development/ocaml-modules/camomile/0.8.2.nix b/pkgs/development/ocaml-modules/camomile/0.8.2.nix
+index 79c7a46e6e99d..e12838ed71fc2 100644
+--- a/pkgs/development/ocaml-modules/camomile/0.8.2.nix
++++ b/pkgs/development/ocaml-modules/camomile/0.8.2.nix
+@@ -13,7 +13,8 @@ stdenv.mkDerivation rec {
+     sha256 = "0x43pjxx70kgip86mmdn08s97k4qzdqc8i79xfyyx28smy1bsa00";
+   };
+ 
+-  buildInputs = [ocaml findlib camlp4];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ camlp4 ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/camomile/0.8.5.nix b/pkgs/development/ocaml-modules/camomile/0.8.5.nix
+index 67bd8b8c755d3..bc34185e987b5 100644
+--- a/pkgs/development/ocaml-modules/camomile/0.8.5.nix
++++ b/pkgs/development/ocaml-modules/camomile/0.8.5.nix
+@@ -14,7 +14,8 @@ stdenv.mkDerivation {
+     sha256 = "167279lia6qx62mdcyc5rjsi4gf4yi52wn9mhgd9y1v3754z7fwb";
+   })];
+ 
+-  buildInputs = [ocaml findlib camlp4];
++  nativeBuildInputs = [ocaml findlib ];
++  buildInputs = [ camlp4];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/cil/default.nix b/pkgs/development/ocaml-modules/cil/default.nix
+index c5a3dcde22635..d2b9456b0de53 100644
+--- a/pkgs/development/ocaml-modules/cil/default.nix
++++ b/pkgs/development/ocaml-modules/cil/default.nix
+@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
+     sha256 = "05739da0b0msx6kmdavr3y2bwi92jbh3szc35d7d8pdisa8g5dv9";
+   };
+ 
+-  buildInputs = [ perl ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ perl ocaml findlib ocamlbuild ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/config-file/default.nix b/pkgs/development/ocaml-modules/config-file/default.nix
+index c408d1a392f1c..fdc6ad453cbc8 100644
+--- a/pkgs/development/ocaml-modules/config-file/default.nix
++++ b/pkgs/development/ocaml-modules/config-file/default.nix
+@@ -9,7 +9,8 @@ stdenv.mkDerivation rec {
+     sha256 = "1b02yxcnsjhr05ssh2br2ka4hxsjpdw34ldl3nk33wfnkwk7g67q";
+   };
+ 
+-  buildInputs = [ ocaml findlib camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ camlp4 ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/cpdf/default.nix b/pkgs/development/ocaml-modules/cpdf/default.nix
+index 632430fe4f7fb..38e964be87113 100644
+--- a/pkgs/development/ocaml-modules/cpdf/default.nix
++++ b/pkgs/development/ocaml-modules/cpdf/default.nix
+@@ -15,7 +15,8 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256:1qmx229nij7g6qmiacmyy4mcgx3k9509p4slahivshqm79d6wiwl";
+   };
+ 
+-  buildInputs = [ ocaml findlib ncurses ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ ncurses ];
+   propagatedBuildInputs = [ camlpdf ];
+ 
+   preInstall = ''
+diff --git a/pkgs/development/ocaml-modules/cryptgps/default.nix b/pkgs/development/ocaml-modules/cryptgps/default.nix
+index 6011c6953baa2..85ae97711f823 100644
+--- a/pkgs/development/ocaml-modules/cryptgps/default.nix
++++ b/pkgs/development/ocaml-modules/cryptgps/default.nix
+@@ -13,7 +13,7 @@ stdenv.mkDerivation {
+     sha256 = "1mp7i42cm9w9grmcsa69m3h1ycpn6a48p43y4xj8rsc12x9nav3s";
+   };
+ 
+-  buildInputs = [ocaml findlib];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   dontConfigure = true;	# Skip configure phase
+ 
+diff --git a/pkgs/development/ocaml-modules/csv/1.5.nix b/pkgs/development/ocaml-modules/csv/1.5.nix
+index ee68782313c53..3c6369ea58a1d 100644
+--- a/pkgs/development/ocaml-modules/csv/1.5.nix
++++ b/pkgs/development/ocaml-modules/csv/1.5.nix
+@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
+     sha256 = "1ca7jgg58j24pccs5fshis726s06fdcjshnwza5kwxpjgdbvc63g";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/ctypes/default.nix b/pkgs/development/ocaml-modules/ctypes/default.nix
+index 8c20a68c2746f..46da4941bd419 100644
+--- a/pkgs/development/ocaml-modules/ctypes/default.nix
++++ b/pkgs/development/ocaml-modules/ctypes/default.nix
+@@ -15,8 +15,8 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-eu5RAuPYC97IM4XUsUw3HQ1BJlEHQ+eBpsdUE6hd+Q8=";
+   };
+ 
+-  nativeBuildInputs = [ pkg-config ];
+-  buildInputs = [ ocaml findlib ncurses ];
++  nativeBuildInputs = [ pkg-config ocaml findlib ];
++  buildInputs = [ ncurses ];
+   propagatedBuildInputs = [ integers libffi bigarray-compat ];
+ 
+   buildPhase = ''
+diff --git a/pkgs/development/ocaml-modules/dolog/default.nix b/pkgs/development/ocaml-modules/dolog/default.nix
+index 64fb2b2c5a59b..99ad976a05af1 100644
+--- a/pkgs/development/ocaml-modules/dolog/default.nix
++++ b/pkgs/development/ocaml-modules/dolog/default.nix
+@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-6wfqT5sqo4YA8XoHH3QhG6/TyzzXCzqjmnPuBArRoj8=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/dum/default.nix b/pkgs/development/ocaml-modules/dum/default.nix
+index 7bdaf2dfad903..d39b71e1db8d9 100644
+--- a/pkgs/development/ocaml-modules/dum/default.nix
++++ b/pkgs/development/ocaml-modules/dum/default.nix
+@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
+     sha256 = "0yrxl97szjc0s2ghngs346x3y0xszx2chidgzxk93frjjpsr1mlr";
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+   propagatedBuildInputs = [ easy-format ];
+ 
+   createFindlibDestdir = true;
+diff --git a/pkgs/development/ocaml-modules/dypgen/default.nix b/pkgs/development/ocaml-modules/dypgen/default.nix
+index 5b5b107b694b8..e7ca86688f5a9 100644
+--- a/pkgs/development/ocaml-modules/dypgen/default.nix
++++ b/pkgs/development/ocaml-modules/dypgen/default.nix
+@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
+     sha256 = "ecb53d6e469e9ec4d57ee6323ff498d45b78883ae13618492488e7c5151fdd97";
+   };
+ 
+-  buildInputs = [ocaml findlib];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/elina/default.nix b/pkgs/development/ocaml-modules/elina/default.nix
+index 2ddef0f40529b..7086590b83fe9 100644
+--- a/pkgs/development/ocaml-modules/elina/default.nix
++++ b/pkgs/development/ocaml-modules/elina/default.nix
+@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
+     sha256 = "1nymykskq1yx87y4xl6hl9i4q6kv0qaq25rniqgl1bfn883p1ysc";
+   };
+ 
+-  buildInputs = [ perl ocaml findlib ];
++  nativeBuildInputs = [ perl ocaml findlib ];
+ 
+   propagatedBuildInputs = [ apron camlidl gmp mpfr ];
+ 
+diff --git a/pkgs/development/ocaml-modules/eliom/default.nix b/pkgs/development/ocaml-modules/eliom/default.nix
+index 69ac628d2014c..69460ce80edf7 100644
+--- a/pkgs/development/ocaml-modules/eliom/default.nix
++++ b/pkgs/development/ocaml-modules/eliom/default.nix
+@@ -28,13 +28,15 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-VNxzpVpXEGlixyjadbW0GjL83jcKV5TWd46UReNYO6w=";
+   };
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     ocaml
+     which
+     findlib
++    opaline
++  ];
++  buildInputs = [
+     js_of_ocaml-ocamlbuild
+     js_of_ocaml-ppx_deriving_json
+-    opaline
+     ocamlnet
+   ];
+ 
+diff --git a/pkgs/development/ocaml-modules/enumerate/default.nix b/pkgs/development/ocaml-modules/enumerate/default.nix
+index d7f467e8eb980..a2f7ec453e9b9 100644
+--- a/pkgs/development/ocaml-modules/enumerate/default.nix
++++ b/pkgs/development/ocaml-modules/enumerate/default.nix
+@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
+     sha256 = "0b6mx5p01lcpimvak4wx6aj2119707wsfzd83rwgb91bhpgzh156";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+   propagatedBuildInputs = [ type_conv camlp4 ];
+ 
+   createFindlibDestdir = true;
+diff --git a/pkgs/development/ocaml-modules/erm_xml/default.nix b/pkgs/development/ocaml-modules/erm_xml/default.nix
+index fa072f8bd1c1f..67e22b1a0cd94 100644
+--- a/pkgs/development/ocaml-modules/erm_xml/default.nix
++++ b/pkgs/development/ocaml-modules/erm_xml/default.nix
+@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-OQdLTq9tJZc6XlcuPv2gxzYiQAUGd6AiBzfSi169XL0=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/erm_xmpp/default.nix b/pkgs/development/ocaml-modules/erm_xmpp/default.nix
+index 3447d590ea23a..deb569c0aa402 100644
+--- a/pkgs/development/ocaml-modules/erm_xmpp/default.nix
++++ b/pkgs/development/ocaml-modules/erm_xmpp/default.nix
+@@ -13,7 +13,8 @@ stdenv.mkDerivation rec {
+     sha256 = "0spzyd9kbyizzwl8y3mq8z19zlkzxnkh2fppry4lyc7vaw7bqrwq";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ camlp4 ];
+   propagatedBuildInputs = [ erm_xml mirage-crypto mirage-crypto-rng base64 ];
+ 
+   configurePhase = ''
+diff --git a/pkgs/development/ocaml-modules/expat/0.9.nix b/pkgs/development/ocaml-modules/expat/0.9.nix
+index 219b8164e7c94..4be86c46067d7 100644
+--- a/pkgs/development/ocaml-modules/expat/0.9.nix
++++ b/pkgs/development/ocaml-modules/expat/0.9.nix
+@@ -18,7 +18,8 @@ stdenv.mkDerivation rec {
+     sha256 = "16n2j3y0jc9xgqyshw9plrwqnjiz30vnpbhahmgxlidbycw8rgjz";
+   };
+ 
+-  buildInputs = [ocaml findlib ounit expat];
++  nativeBuildInputs = [ocaml findlib ];
++  buildInputs = [ ounit expat];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/expat/default.nix b/pkgs/development/ocaml-modules/expat/default.nix
+index e951acaa71a5f..388176980ac93 100644
+--- a/pkgs/development/ocaml-modules/expat/default.nix
++++ b/pkgs/development/ocaml-modules/expat/default.nix
+@@ -15,7 +15,8 @@ stdenv.mkDerivation rec {
+     substituteInPlace Makefile --replace "gcc" "\$(CC)"
+   '';
+ 
+-  buildInputs = [ ocaml findlib expat ounit ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ expat ounit ];
+ 
+   doCheck = !lib.versionAtLeast ocaml.version "4.06";
+   checkTarget = "testall";
+diff --git a/pkgs/development/ocaml-modules/extlib/default.nix b/pkgs/development/ocaml-modules/extlib/default.nix
+index d1860788838a9..75f4f282005f7 100644
+--- a/pkgs/development/ocaml-modules/extlib/default.nix
++++ b/pkgs/development/ocaml-modules/extlib/default.nix
+@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
+     sha256 = "0npq4hq3zym8nmlyji7l5cqk6drx2rkcx73d60rxqh5g8dla8p4k";
+   };
+ 
+-  buildInputs = [ ocaml findlib cppo ];
++  nativeBuildInputs = [ ocaml findlib cppo ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/farfadet/default.nix b/pkgs/development/ocaml-modules/farfadet/default.nix
+index 79b742da575d8..2e7009942a953 100644
+--- a/pkgs/development/ocaml-modules/farfadet/default.nix
++++ b/pkgs/development/ocaml-modules/farfadet/default.nix
+@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
+     sha256 = "0nlafnp0pwx0n4aszpsk6nvcvqi9im306p4jhx70si7k3xprlr2j";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   propagatedBuildInputs = [ faraday ];
+ 
+diff --git a/pkgs/development/ocaml-modules/fontconfig/default.nix b/pkgs/development/ocaml-modules/fontconfig/default.nix
+index f4afe80d532d5..adcf010ebf852 100644
+--- a/pkgs/development/ocaml-modules/fontconfig/default.nix
++++ b/pkgs/development/ocaml-modules/fontconfig/default.nix
+@@ -11,8 +11,8 @@ stdenv.mkDerivation {
+     sha256 = "1fw6bzydmnyh2g4x35mcbg0hypnxqhynivk4nakcsx7prr8zr3yh";
+   };
+ 
+-  nativeBuildInputs = [ pkg-config ];
+-  buildInputs = [ ocaml fontconfig ];
++  nativeBuildInputs = [ pkg-config ocaml ];
++  buildInputs = [ fontconfig ];
+   makeFlags = [
+     "OCAML_STDLIB_DIR=$(out)/lib/ocaml/${lib.getVersion ocaml}/site-lib/"
+     "OCAML_HAVE_OCAMLOPT=yes"
+diff --git a/pkgs/development/ocaml-modules/fpath/default.nix b/pkgs/development/ocaml-modules/fpath/default.nix
+index 532210888bf38..e620f4f574542 100644
+--- a/pkgs/development/ocaml-modules/fpath/default.nix
++++ b/pkgs/development/ocaml-modules/fpath/default.nix
+@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
+     sha256 = "03z7mj0sqdz465rc4drj1gr88l9q3nfs374yssvdjdyhjbqqzc0j";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   propagatedBuildInputs = [ astring ];
+ 
+diff --git a/pkgs/development/ocaml-modules/frontc/default.nix b/pkgs/development/ocaml-modules/frontc/default.nix
+index bc74a5b58a082..e403be728c555 100644
+--- a/pkgs/development/ocaml-modules/frontc/default.nix
++++ b/pkgs/development/ocaml-modules/frontc/default.nix
+@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
+     sha256 = "1dq5nks0c9gsbr1m8k39m1bniawr5hqcy1r8x5px7naa95ch06ak";
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   meta = with lib; {
+     inherit (src.meta) homepage;
+diff --git a/pkgs/development/ocaml-modules/functory/default.nix b/pkgs/development/ocaml-modules/functory/default.nix
+index 959963c4752a6..d8298e2032dd9 100644
+--- a/pkgs/development/ocaml-modules/functory/default.nix
++++ b/pkgs/development/ocaml-modules/functory/default.nix
+@@ -21,7 +21,7 @@ stdenv.mkDerivation {
+     inherit (param) sha256;
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   installTargets = [ "ocamlfind-install" ];
+ 
+diff --git a/pkgs/development/ocaml-modules/getopt/default.nix b/pkgs/development/ocaml-modules/getopt/default.nix
+index 3400774d4c075..7fc340ad47458 100644
+--- a/pkgs/development/ocaml-modules/getopt/default.nix
++++ b/pkgs/development/ocaml-modules/getopt/default.nix
+@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
+     sha256 = "0bng2mmdixpmj23xn8krlnaq66k22iclwz46r8zjrsrq3wcn1xgn";
+   };
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     ocaml
+     findlib
+     ocamlbuild
+diff --git a/pkgs/development/ocaml-modules/gg/default.nix b/pkgs/development/ocaml-modules/gg/default.nix
+index 58e2b67eacc65..2a4fe612fd4a1 100644
+--- a/pkgs/development/ocaml-modules/gg/default.nix
++++ b/pkgs/development/ocaml-modules/gg/default.nix
+@@ -19,7 +19,7 @@ stdenv.mkDerivation {
+     sha256 = "0czj41sr8jsivl3z8wyblf9k971j3kx2wc3s0c1nhzcc8allg9i2";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild opaline ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild opaline ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/gmetadom/default.nix b/pkgs/development/ocaml-modules/gmetadom/default.nix
+index 29df5ce8f4e45..738d56f56db50 100644
+--- a/pkgs/development/ocaml-modules/gmetadom/default.nix
++++ b/pkgs/development/ocaml-modules/gmetadom/default.nix
+@@ -22,8 +22,8 @@ stdenv.mkDerivation rec {
+   '';
+ 
+ 
+-  nativeBuildInputs = [ pkg-config ];
+-  buildInputs = [ocaml findlib gdome2 libxslt];
++  nativeBuildInputs = [ pkg-config ocaml findlib ];
++  buildInputs = [ gdome2 libxslt];
+   propagatedBuildInputs = [gdome2];
+ 
+   meta = {
+diff --git a/pkgs/development/ocaml-modules/hacl-star/default.nix b/pkgs/development/ocaml-modules/hacl-star/default.nix
+index 8a29439c7a599..d8c3593a7c883 100644
+--- a/pkgs/development/ocaml-modules/hacl-star/default.nix
++++ b/pkgs/development/ocaml-modules/hacl-star/default.nix
+@@ -12,7 +12,7 @@ buildDunePackage {
+     zarith
+   ];
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     cppo
+   ];
+ }
+diff --git a/pkgs/development/ocaml-modules/hmap/default.nix b/pkgs/development/ocaml-modules/hmap/default.nix
+index 67622a8ef6a0f..d903d97abb03d 100644
+--- a/pkgs/development/ocaml-modules/hmap/default.nix
++++ b/pkgs/development/ocaml-modules/hmap/default.nix
+@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
+     sha256 = "10xyjy4ab87z7jnghy0wnla9wrmazgyhdwhr4hdmxxdn28dxn03a";
+   };
+ 
+-  buildInputs = [ ocaml ocamlbuild findlib topkg ];
++  nativeBuildInputs = [ ocaml ocamlbuild findlib topkg ];
+ 
+   inherit (topkg) installPhase;
+ 
+diff --git a/pkgs/development/ocaml-modules/inifiles/default.nix b/pkgs/development/ocaml-modules/inifiles/default.nix
+index 90308ee7d6d9a..7a3beeff6d346 100644
+--- a/pkgs/development/ocaml-modules/inifiles/default.nix
++++ b/pkgs/development/ocaml-modules/inifiles/default.nix
+@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
+     })
+   ];
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+   propagatedBuildInputs = [ ocaml_pcre ];
+ 
+   buildFlags = [ "all" "opt" ];
+diff --git a/pkgs/development/ocaml-modules/inotify/default.nix b/pkgs/development/ocaml-modules/inotify/default.nix
+index e8289d929637a..a53631f8d8f4f 100644
+--- a/pkgs/development/ocaml-modules/inotify/default.nix
++++ b/pkgs/development/ocaml-modules/inotify/default.nix
+@@ -19,7 +19,8 @@ stdenv.mkDerivation rec {
+     sha256 = "04lfxrrsmk2mc704kaln8jqx93jc4bkxhijmfy2d4cmk1cim7r6k";
+   }) ];
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ocaml_lwt ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ ocaml_lwt ];
+   checkInputs = [ ounit fileutils ];
+ 
+   configureFlags = [ "--enable-lwt"
+diff --git a/pkgs/development/ocaml-modules/iso8601/default.nix b/pkgs/development/ocaml-modules/iso8601/default.nix
+index add18281008ca..83851db0241bf 100644
+--- a/pkgs/development/ocaml-modules/iso8601/default.nix
++++ b/pkgs/development/ocaml-modules/iso8601/default.nix
+@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-sXnYAJcU88797orzzfbA2XG91Lk8mDV677J1Am5o7Xo=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+   createFindlibDestdir = true;
+ 
+   meta = {
+diff --git a/pkgs/development/ocaml-modules/javalib/default.nix b/pkgs/development/ocaml-modules/javalib/default.nix
+index 78b61de8d9c11..7bae4f5fec97c 100644
+--- a/pkgs/development/ocaml-modules/javalib/default.nix
++++ b/pkgs/development/ocaml-modules/javalib/default.nix
+@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-du1h+S+A7CetMXofsYxdGeSsobCgspDB9oUE9WNUbbo=";
+   };
+ 
+-  buildInputs = [ which ocaml findlib ];
++  nativeBuildInputs = [ which ocaml findlib ];
+ 
+   patches = [ ./configure.sh.patch ./Makefile.config.example.patch ];
+ 
+diff --git a/pkgs/development/ocaml-modules/lablgl/default.nix b/pkgs/development/ocaml-modules/lablgl/default.nix
+index da4318aef4c13..85c27f93a0918 100644
+--- a/pkgs/development/ocaml-modules/lablgl/default.nix
++++ b/pkgs/development/ocaml-modules/lablgl/default.nix
+@@ -15,7 +15,8 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256:141kc816iv59z96738i3vn9m9iw9g2zhi45hk4cchpwd99ar5l6k";
+   };
+ 
+-  buildInputs = [ ocaml findlib freeglut ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ freeglut ];
+   propagatedBuildInputs = [ libGLU libGL ];
+ 
+   patches = [ ./Makefile.config.patch ./META.patch ];
+diff --git a/pkgs/development/ocaml-modules/lablgtk-extras/1.4.nix b/pkgs/development/ocaml-modules/lablgtk-extras/1.4.nix
+index f2fbc71b5a931..733a64aed8e15 100644
+--- a/pkgs/development/ocaml-modules/lablgtk-extras/1.4.nix
++++ b/pkgs/development/ocaml-modules/lablgtk-extras/1.4.nix
+@@ -9,7 +9,8 @@ stdenv.mkDerivation rec {
+     sha256 = "09fqxwdib7r9yxynknc9gv3jw2hnhj5cak7q5jngk6m8rzvmhfcc";
+   };
+ 
+-  buildInputs = [ ocaml findlib camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ camlp4 ];
+   propagatedBuildInputs = [ config-file lablgtk xmlm ];
+ 
+   createFindlibDestdir = true;
+diff --git a/pkgs/development/ocaml-modules/lablgtk-extras/default.nix b/pkgs/development/ocaml-modules/lablgtk-extras/default.nix
+index d97f2f5bffd26..4cce1fafa7791 100644
+--- a/pkgs/development/ocaml-modules/lablgtk-extras/default.nix
++++ b/pkgs/development/ocaml-modules/lablgtk-extras/default.nix
+@@ -16,7 +16,8 @@ stdenv.mkDerivation rec {
+     sha256 = "1bbdp5j18s582mmyd7qiaq1p08g2ag4gl7x65pmzahbhg719hjda";
+   };
+ 
+-  buildInputs = [ ocaml findlib camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ camlp4 ];
+   propagatedBuildInputs = [ config-file lablgtk xmlm ];
+ 
+   createFindlibDestdir = true;
+diff --git a/pkgs/development/ocaml-modules/lablgtk/2.14.0.nix b/pkgs/development/ocaml-modules/lablgtk/2.14.0.nix
+index f64b6571970ba..ecaefcab0602f 100644
+--- a/pkgs/development/ocaml-modules/lablgtk/2.14.0.nix
++++ b/pkgs/development/ocaml-modules/lablgtk/2.14.0.nix
+@@ -16,8 +16,8 @@ stdenv.mkDerivation (rec {
+     sha256 = "1fnh0amm7lwgyjdhmlqgsp62gwlar1140425yc1j6inwmgnsp0a9";
+   };
+ 
+-  nativeBuildInputs = [ pkg-config ];
+-  buildInputs = [ ocaml findlib gtk2 libgnomecanvas gtksourceview camlp4 ];
++  nativeBuildInputs = [ pkg-config ocaml findlib ];
++  buildInputs = [ gtk2 libgnomecanvas gtksourceview camlp4 ];
+ 
+   configureFlags = [ "--with-libdir=$(out)/lib/ocaml/${ocaml.version}/site-lib" ];
+   buildFlags = [ "world" ];
+diff --git a/pkgs/development/ocaml-modules/lablgtk/default.nix b/pkgs/development/ocaml-modules/lablgtk/default.nix
+index a442ae35aa52d..36ade6979c3eb 100644
+--- a/pkgs/development/ocaml-modules/lablgtk/default.nix
++++ b/pkgs/development/ocaml-modules/lablgtk/default.nix
+@@ -23,8 +23,8 @@ stdenv.mkDerivation {
+   pname = "lablgtk";
+   inherit (param) version src;
+ 
+-  nativeBuildInputs = [ pkg-config ];
+-  buildInputs = [ ocaml findlib gtk2 libgnomecanvas gtksourceview ];
++  nativeBuildInputs = [ pkg-config ocaml findlib ];
++  buildInputs = [ gtk2 libgnomecanvas gtksourceview ];
+ 
+   configureFlags = [ "--with-libdir=$(out)/lib/ocaml/${ocaml.version}/site-lib" ];
+   buildFlags = [ "world" ];
+diff --git a/pkgs/development/ocaml-modules/labltk/default.nix b/pkgs/development/ocaml-modules/labltk/default.nix
+index 971668ce0e11e..56e79ffc59046 100644
+--- a/pkgs/development/ocaml-modules/labltk/default.nix
++++ b/pkgs/development/ocaml-modules/labltk/default.nix
+@@ -51,7 +51,8 @@ stdenv.mkDerivation rec {
+   inherit (param) version src;
+   pname = "ocaml${ocaml.version}-labltk";
+ 
+-  buildInputs = [ ocaml findlib tcl tk makeWrapper ];
++  nativeBuildInputs = [ ocaml findlib makeWrapper ];
++  buildInputs = [ tcl tk ];
+ 
+   configureFlags = [ "--use-findlib" "--installbindir" "$(out)/bin" ];
+   dontAddPrefix = true;
+diff --git a/pkgs/development/ocaml-modules/llvm/default.nix b/pkgs/development/ocaml-modules/llvm/default.nix
+index 264d95f39f67e..61ef0e950c374 100644
+--- a/pkgs/development/ocaml-modules/llvm/default.nix
++++ b/pkgs/development/ocaml-modules/llvm/default.nix
+@@ -8,8 +8,8 @@ stdenv.mkDerivation {
+ 
+   inherit (libllvm) src;
+ 
+-  nativeBuildInputs = [ cmake ];
+-  buildInputs = [ python2 ocaml findlib ctypes ];
++  nativeBuildInputs = [ cmake python2 ocaml findlib ];
++  buildInputs = [ ctypes ];
+   propagatedBuildInputs = [ libllvm ];
+ 
+   cmakeFlags = [
+diff --git a/pkgs/development/ocaml-modules/lua-ml/default.nix b/pkgs/development/ocaml-modules/lua-ml/default.nix
+index 8a4f58ccbbd79..cc3de3807a1fb 100644
+--- a/pkgs/development/ocaml-modules/lua-ml/default.nix
++++ b/pkgs/development/ocaml-modules/lua-ml/default.nix
+@@ -16,8 +16,7 @@ stdenv.mkDerivation rec {
+     sha256 = "04lv98nxmzanvyn4c0k6k0ax29f5xfdl8qzpf5hwadslq213a044";
+   };
+ 
+-  nativeBuildInputs = [ opaline ];
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ opaline ocaml findlib ocamlbuild ];
+ 
+   buildFlags = [ "lib" ];
+ 
+diff --git a/pkgs/development/ocaml-modules/macaque/default.nix b/pkgs/development/ocaml-modules/macaque/default.nix
+index a91e898227d6b..9abe0b33be579 100644
+--- a/pkgs/development/ocaml-modules/macaque/default.nix
++++ b/pkgs/development/ocaml-modules/macaque/default.nix
+@@ -11,7 +11,8 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-W9ZFaINYYtIikKy/ZqdlKeFQSA7DQT9plc3+ZhlSIJI=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ camlp4 ];
+   propagatedBuildInputs = [ pgocaml ];
+ 
+   createFindlibDestdir = true;
+diff --git a/pkgs/development/ocaml-modules/magick/default.nix b/pkgs/development/ocaml-modules/magick/default.nix
+index f9fec120a6257..2625b16ff3b40 100644
+--- a/pkgs/development/ocaml-modules/magick/default.nix
++++ b/pkgs/development/ocaml-modules/magick/default.nix
+@@ -13,8 +13,8 @@ stdenv.mkDerivation rec {
+     sha256 = "0gn9l2qdr8gby2x8c2mb59x1kipb2plr45rbq6ymcxyi0wmzfh3q";
+   };
+ 
+-  nativeBuildInputs = [ which pkg-config ];
+-  buildInputs = [ ocaml findlib imagemagick ];
++  nativeBuildInputs = [ which pkg-config ocaml findlib ];
++  buildInputs = [ imagemagick ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/mlgmp/default.nix b/pkgs/development/ocaml-modules/mlgmp/default.nix
+index ffd78150689a2..322c0045747e5 100644
+--- a/pkgs/development/ocaml-modules/mlgmp/default.nix
++++ b/pkgs/development/ocaml-modules/mlgmp/default.nix
+@@ -21,7 +21,8 @@ stdenv.mkDerivation rec {
+   ];
+ 
+   preConfigure = "make clean";
+-  buildInputs = [ocaml findlib gmp mpfr ncurses];
++  nativeBuildInputs = [ocaml findlib ];
++  buildInputs = [ gmp mpfr ncurses];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/mlgmpidl/default.nix b/pkgs/development/ocaml-modules/mlgmpidl/default.nix
+index 4e27c8ff3bb71..a168ade71dea1 100644
+--- a/pkgs/development/ocaml-modules/mlgmpidl/default.nix
++++ b/pkgs/development/ocaml-modules/mlgmpidl/default.nix
+@@ -10,7 +10,8 @@ stdenv.mkDerivation rec {
+     sha256 = "17xqiclaqs4hmnb92p9z6z9a1xfr31vcn8nlnj8ykk57by31vfza";
+   };
+ 
+-  buildInputs = [ perl gmp mpfr ocaml findlib camlidl ];
++  nativeBuildInputs = [ perl ocaml findlib ];
++  buildInputs = [ gmp mpfr camlidl ];
+ 
+   prefixKey = "-prefix ";
+   configureFlags = [
+diff --git a/pkgs/development/ocaml-modules/mysql/default.nix b/pkgs/development/ocaml-modules/mysql/default.nix
+index 6ccdfa9cf81c6..584a16e1d3923 100644
+--- a/pkgs/development/ocaml-modules/mysql/default.nix
++++ b/pkgs/development/ocaml-modules/mysql/default.nix
+@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
+      "--libdir=$out/lib/ocaml/${ocaml.version}/site-lib/mysql"
+   ];
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/nocrypto/default.nix b/pkgs/development/ocaml-modules/nocrypto/default.nix
+index fdd24094c17b6..8350b37ed0b2a 100644
+--- a/pkgs/development/ocaml-modules/nocrypto/default.nix
++++ b/pkgs/development/ocaml-modules/nocrypto/default.nix
+@@ -55,8 +55,8 @@ stdenv.mkDerivation rec {
+     })
+   ];
+ 
+-  nativeBuildInputs = [ ocaml findlib ocamlbuild cc-wrapper ];
+-  buildInputs = [ ocamlbuild findlib topkg cpuid ocb-stubblr ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild cc-wrapper ocb-stubblr ];
++  buildInputs = [ cpuid ];
+   propagatedBuildInputs = [ cstruct ppx_deriving ppx_sexp_conv sexplib zarith ] ++ optional withLwt cstruct-lwt;
+ 
+   buildPhase = "${topkg.buildPhase} --accelerate false --with-lwt ${boolToString withLwt}";
+diff --git a/pkgs/development/ocaml-modules/notty/default.nix b/pkgs/development/ocaml-modules/notty/default.nix
+index 94342bb31282f..244dcdb9627b5 100644
+--- a/pkgs/development/ocaml-modules/notty/default.nix
++++ b/pkgs/development/ocaml-modules/notty/default.nix
+@@ -19,7 +19,8 @@ stdenv.mkDerivation rec {
+     sha256 = "1y3hx8zjri3x50nyiqal5gak1sw54gw3xssrqbj7srinvkdmrz1q";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ocb-stubblr ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  buildInputs = [ ocb-stubblr ];
+   propagatedBuildInputs = [ result uucp uuseg uutf ] ++
+                           optional withLwt lwt;
+ 
+diff --git a/pkgs/development/ocaml-modules/num/default.nix b/pkgs/development/ocaml-modules/num/default.nix
+index b1293a2ab553e..0e93b9f9e1405 100644
+--- a/pkgs/development/ocaml-modules/num/default.nix
++++ b/pkgs/development/ocaml-modules/num/default.nix
+@@ -17,7 +17,6 @@ stdenv.mkDerivation rec {
+   ] ++ lib.optional withStatic ./enable-static.patch;
+ 
+   nativeBuildInputs = [ ocaml findlib ];
+-  buildInputs = [ ocaml findlib ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/ocaml-cairo/default.nix b/pkgs/development/ocaml-modules/ocaml-cairo/default.nix
+index 7d2960fc5a664..6748619d49280 100644
+--- a/pkgs/development/ocaml-modules/ocaml-cairo/default.nix
++++ b/pkgs/development/ocaml-modules/ocaml-cairo/default.nix
+@@ -19,9 +19,8 @@ stdenv.mkDerivation rec {
+ 
+   patches = [ ./META.patch ];
+ 
+-  nativeBuildInputs = [ pkg-config unzip ];
+-  buildInputs = [ ocaml automake gnum4 autoconf
+-                  findlib freetype lablgtk cairo gdk-pixbuf gtk2 pango ];
++  nativeBuildInputs = [ pkg-config unzip ocaml automake gnum4 autoconf findlib ];
++  buildInputs = [ freetype lablgtk cairo gdk-pixbuf gtk2 pango ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/ocaml-libvirt/default.nix b/pkgs/development/ocaml-modules/ocaml-libvirt/default.nix
+index 581890178eae8..c5b232cc059b9 100644
+--- a/pkgs/development/ocaml-modules/ocaml-libvirt/default.nix
++++ b/pkgs/development/ocaml-modules/ocaml-libvirt/default.nix
+@@ -13,9 +13,7 @@ stdenv.mkDerivation rec {
+ 
+   propagatedBuildInputs = [ libvirt ];
+ 
+-  nativeBuildInputs = [ autoreconfHook pkg-config findlib perl ];
+-
+-  buildInputs = [ ocaml ];
++  nativeBuildInputs = [ autoreconfHook pkg-config findlib perl ocaml ];
+ 
+   buildFlags = [ "all" "opt" "CPPFLAGS=-Wno-error" ];
+   installTargets = "install-opt";
+diff --git a/pkgs/development/ocaml-modules/ocamlnat/default.nix b/pkgs/development/ocaml-modules/ocamlnat/default.nix
+index f8d20b7124bce..903c43dca473c 100644
+--- a/pkgs/development/ocaml-modules/ocamlnat/default.nix
++++ b/pkgs/development/ocaml-modules/ocamlnat/default.nix
+@@ -12,7 +12,8 @@ stdenv.mkDerivation rec {
+     sha256 = "0dyvy0j6f47laxhnadvm71z1py9hz9zd49hamf6bij99cggb2ij1";
+   };
+ 
+-  buildInputs = [ocaml findlib ounit];
++  nativeBuildInputs = [ocaml findlib ];
++  buildInputs = [ ounit];
+ 
+   prefixKey = "--prefix ";
+ 
+diff --git a/pkgs/development/ocaml-modules/ocamlnet/default.nix b/pkgs/development/ocaml-modules/ocamlnet/default.nix
+index d6e8f83968aad..81c5fbfde63f0 100644
+--- a/pkgs/development/ocaml-modules/ocamlnet/default.nix
++++ b/pkgs/development/ocaml-modules/ocamlnet/default.nix
+@@ -15,8 +15,8 @@ stdenv.mkDerivation rec {
+     sha256 = "1vlwxjxr946gdl61a1d7yk859cijq45f60dhn54ik3w4g6cx33pr";
+   };
+ 
+-  nativeBuildInputs = [ pkg-config which ];
+-  buildInputs = [ ncurses ocaml findlib ocaml_pcre camlzip gnutls nettle ];
++  nativeBuildInputs = [ pkg-config which ocaml findlib ];
++  buildInputs = [ ncurses ocaml_pcre camlzip gnutls nettle ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/ocamlsdl/default.nix b/pkgs/development/ocaml-modules/ocamlsdl/default.nix
+index 7c782b5268fdd..3482aa37e750b 100644
+--- a/pkgs/development/ocaml-modules/ocamlsdl/default.nix
++++ b/pkgs/development/ocaml-modules/ocamlsdl/default.nix
+@@ -17,8 +17,8 @@ stdenv.mkDerivation rec {
+     sha256 = "abfb295b263dc11e97fffdd88ea1a28b46df8cc2b196777093e4fe7f509e4f8f";
+   };
+ 
+-  nativeBuildInputs = [ pkg-config ];
+-  buildInputs = [ocaml findlib SDL SDL_image SDL_mixer SDL_ttf SDL_gfx lablgl];
++  nativeBuildInputs = [ pkg-config ocaml findlib ];
++  buildInputs = [ SDL SDL_image SDL_mixer SDL_ttf SDL_gfx lablgl ];
+ 
+   propagatedBuildInputs = [ SDL SDL_image SDL_mixer SDL_ttf SDL_gfx pkg-config ];
+   createFindlibDestdir = true;
+diff --git a/pkgs/development/ocaml-modules/ocb-stubblr/default.nix b/pkgs/development/ocaml-modules/ocb-stubblr/default.nix
+index 2f26eb32ffb6a..9966c660ea606 100644
+--- a/pkgs/development/ocaml-modules/ocb-stubblr/default.nix
++++ b/pkgs/development/ocaml-modules/ocb-stubblr/default.nix
+@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
+ 
+   patches = [ ./pkg-config.patch ];
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   propagatedBuildInputs = [ astring ];
+ 
+diff --git a/pkgs/development/ocaml-modules/ocp-ocamlres/default.nix b/pkgs/development/ocaml-modules/ocp-ocamlres/default.nix
+index 7635f3a686cd4..ee9d00ac3df60 100644
+--- a/pkgs/development/ocaml-modules/ocp-ocamlres/default.nix
++++ b/pkgs/development/ocaml-modules/ocp-ocamlres/default.nix
+@@ -14,7 +14,8 @@ stdenv.mkDerivation rec {
+     sha256 = "0smfwrj8qhzknhzawygxi0vgl2af4vyi652fkma59rzjpvscqrnn";
+   };
+ 
+-  buildInputs = [ ocaml findlib astring pprint ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ astring pprint ];
+   createFindlibDestdir = true;
+ 
+   installFlags = [ "BINDIR=$(out)/bin" ];
+diff --git a/pkgs/development/ocaml-modules/ocplib-simplex/default.nix b/pkgs/development/ocaml-modules/ocplib-simplex/default.nix
+index 8435d1c5e5160..5c7cf5830fb51 100644
+--- a/pkgs/development/ocaml-modules/ocplib-simplex/default.nix
++++ b/pkgs/development/ocaml-modules/ocplib-simplex/default.nix
+@@ -15,8 +15,7 @@ stdenv.mkDerivation {
+     sha256 = "09niyidrjzrj8g1qwx4wgsdf5m6cwrnzg7zsgala36jliic4di60";
+   };
+ 
+-  nativeBuildInputs = [ autoreconfHook ];
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ autoreconfHook ocaml findlib ];
+ 
+   installFlags = [ "LIBDIR=$(OCAMLFIND_DESTDIR)" ];
+ 
+diff --git a/pkgs/development/ocaml-modules/ocsigen-deriving/default.nix b/pkgs/development/ocaml-modules/ocsigen-deriving/default.nix
+index d2e20838ecaf7..5687fb2a46348 100644
+--- a/pkgs/development/ocaml-modules/ocsigen-deriving/default.nix
++++ b/pkgs/development/ocaml-modules/ocsigen-deriving/default.nix
+@@ -26,7 +26,8 @@ stdenv.mkDerivation rec {
+ 
+   createFindlibDestdir = true;
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild oasis camlp4 num ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild oasis ];
++  buildInputs = [ camlp4 num ];
+ 
+   meta = {
+     homepage = "https://github.com/ocsigen/deriving";
+diff --git a/pkgs/development/ocaml-modules/ocsigen-start/default.nix b/pkgs/development/ocaml-modules/ocsigen-start/default.nix
+index 1fccbbb9b30c2..29a6afc805132 100644
+--- a/pkgs/development/ocaml-modules/ocsigen-start/default.nix
++++ b/pkgs/development/ocaml-modules/ocsigen-start/default.nix
+@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
+   pname = "ocaml${ocaml.version}-ocsigen-start";
+   version = "4.3.0";
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+   propagatedBuildInputs = [ pgocaml_ppx safepass ocsigen-toolkit yojson resource-pooling cohttp-lwt-unix ocamlnet ];
+ 
+   patches = [ ./templates-dir.patch ];
+diff --git a/pkgs/development/ocaml-modules/ocsigen-toolkit/default.nix b/pkgs/development/ocaml-modules/ocsigen-toolkit/default.nix
+index 78420d09779b2..32b3fb3e0729b 100644
+--- a/pkgs/development/ocaml-modules/ocsigen-toolkit/default.nix
++++ b/pkgs/development/ocaml-modules/ocsigen-toolkit/default.nix
+@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
+  version = "3.0.1";
+ 
+  propagatedBuildInputs = [ calendar js_of_ocaml-ppx_deriving_json eliom ];
+- buildInputs = [ ocaml findlib opaline ];
++ nativeBuildInputs = [ ocaml findlib opaline ];
+ 
+  installPhase = ''
+     runHook preInstall
+diff --git a/pkgs/development/ocaml-modules/ocurl/default.nix b/pkgs/development/ocaml-modules/ocurl/default.nix
+index ea2af8dd4c827..0a8092c7bb1b8 100644
+--- a/pkgs/development/ocaml-modules/ocurl/default.nix
++++ b/pkgs/development/ocaml-modules/ocurl/default.nix
+@@ -13,8 +13,10 @@ stdenv.mkDerivation rec {
+     sha256 = "0n621cxb9012pj280c7821qqsdhypj8qy9qgrah79dkh6a8h2py6";
+   };
+ 
+-  buildInputs = [ pkg-config ocaml findlib ncurses ];
++  nativeBuildInputs = [ pkg-config ocaml findlib ];
++  buildInputs = [ ncurses ];
+   propagatedBuildInputs = [ curl lwt ];
++
+   createFindlibDestdir = true;
+   meta = {
+     description = "OCaml bindings to libcurl";
+diff --git a/pkgs/development/ocaml-modules/odn/default.nix b/pkgs/development/ocaml-modules/odn/default.nix
+index 9179ce3f1d160..a2bba7c75d366 100644
+--- a/pkgs/development/ocaml-modules/odn/default.nix
++++ b/pkgs/development/ocaml-modules/odn/default.nix
+@@ -13,7 +13,8 @@ stdenv.mkDerivation rec {
+     sha256 = "09a8zdyifpc2nl4hdvg9206142y31cq95ajgij011s1qcg3z93lj";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild type_conv ounit camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ type_conv ounit camlp4 ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/omd/default.nix b/pkgs/development/ocaml-modules/omd/default.nix
+index d6cea183d85cc..2664c0a075c9e 100644
+--- a/pkgs/development/ocaml-modules/omd/default.nix
++++ b/pkgs/development/ocaml-modules/omd/default.nix
+@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
+     sha256 = "1sgdgzpx96br7npj8mh91cli5mqmzsjpngwm7x4212n3k1d0ivwa";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/otfm/default.nix b/pkgs/development/ocaml-modules/otfm/default.nix
+index 0642b30699c2e..0229ca8ef20b9 100644
+--- a/pkgs/development/ocaml-modules/otfm/default.nix
++++ b/pkgs/development/ocaml-modules/otfm/default.nix
+@@ -17,7 +17,7 @@ stdenv.mkDerivation {
+     sha256 = "054s82539k3kc9na6s47g3scsl04icjahpas7pv5351jmsgqcq3k";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   propagatedBuildInputs = [ uutf result ];
+ 
+diff --git a/pkgs/development/ocaml-modules/piqi-ocaml/default.nix b/pkgs/development/ocaml-modules/piqi-ocaml/default.nix
+index 590c001c41950..d977ef0437ce5 100644
+--- a/pkgs/development/ocaml-modules/piqi-ocaml/default.nix
++++ b/pkgs/development/ocaml-modules/piqi-ocaml/default.nix
+@@ -12,7 +12,8 @@ stdenv.mkDerivation rec {
+     sha256 = "1913jpsb8mvqi8609j4g4sm5jhg50dq0xqxgy8nmvknfryyc89nm";
+   };
+ 
+-  buildInputs = [ ocaml findlib piqi stdlib-shims ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ piqi stdlib-shims ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/piqi/default.nix b/pkgs/development/ocaml-modules/piqi/default.nix
+index faeb804d8aa88..cd4252bf8c530 100644
+--- a/pkgs/development/ocaml-modules/piqi/default.nix
++++ b/pkgs/development/ocaml-modules/piqi/default.nix
+@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
+     sha256 = "0v04hs85xv6d4ysqxyv1dik34dx49yab9shpi4x7iv19qlzl7csb";
+   };
+ 
+-  buildInputs = [ ocaml findlib which ];
++  nativeBuildInputs = [ ocaml findlib which ];
+   propagatedBuildInputs = [ sedlex_2 xmlm easy-format base64 ];
+ 
+   patches = [ ./no-ocamlpath-override.patch ];
+diff --git a/pkgs/development/ocaml-modules/ppx_cstubs/default.nix b/pkgs/development/ocaml-modules/ppx_cstubs/default.nix
+index 935d67f708454..837373a220335 100644
+--- a/pkgs/development/ocaml-modules/ppx_cstubs/default.nix
++++ b/pkgs/development/ocaml-modules/ppx_cstubs/default.nix
+@@ -26,10 +26,11 @@ buildDunePackage rec {
+     sha256 = "15cjb9ygnvp2kv85rrb7ncz7yalifyl7wd2hp2cl8r1qrpgi1d0w";
+   };
+ 
++  nativeBuildInputs = [ cppo ];
++
+   buildInputs = [
+     bigarray-compat
+     containers
+-    cppo
+     ctypes
+     integers
+     num
+diff --git a/pkgs/development/ocaml-modules/ppx_tools/default.nix b/pkgs/development/ocaml-modules/ppx_tools/default.nix
+index 64948c29ae500..07547cbd29786 100644
+--- a/pkgs/development/ocaml-modules/ppx_tools/default.nix
++++ b/pkgs/development/ocaml-modules/ppx_tools/default.nix
+@@ -63,7 +63,6 @@ else
+     inherit src;
+ 
+     nativeBuildInputs = [ ocaml findlib ];
+-    buildInputs = [ ocaml findlib ];
+ 
+     createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/pycaml/default.nix b/pkgs/development/ocaml-modules/pycaml/default.nix
+index c19b40eb9afe7..06d4d6557ea88 100644
+--- a/pkgs/development/ocaml-modules/pycaml/default.nix
++++ b/pkgs/development/ocaml-modules/pycaml/default.nix
+@@ -27,7 +27,8 @@ stdenv.mkDerivation rec {
+   sourceRoot = "pycaml";
+   patches = [ "../debian/patches/*.patch" ];
+ 
+-  buildInputs = [ ncurses ocaml findlib python2 ocaml_make ];
++  nativeBuildInputs = [ ocaml findlib python2 ];
++  buildInputs = [ ncurses ocaml_make ];
+   createFindlibDestdir = true;
+ 
+   # the Makefile is not shipped with an install target, hence we do it ourselves.
+diff --git a/pkgs/development/ocaml-modules/pyml/default.nix b/pkgs/development/ocaml-modules/pyml/default.nix
+index 7bc794fa24876..c1fbb7c14c783 100644
+--- a/pkgs/development/ocaml-modules/pyml/default.nix
++++ b/pkgs/development/ocaml-modules/pyml/default.nix
+@@ -11,9 +11,11 @@ stdenv.mkDerivation rec {
+     sha256 = "15xk6bgdzsf04d6wdjpr3s1ci2g7d7qnbq3102avkz179d5n62h7";
+   };
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     ocaml
+     findlib
++  ];
++  buildInputs = [
+     utop
+     ncurses
+   ];
+diff --git a/pkgs/development/ocaml-modules/react/default.nix b/pkgs/development/ocaml-modules/react/default.nix
+index 0edae98306988..9a5a60a68f8d2 100644
+--- a/pkgs/development/ocaml-modules/react/default.nix
++++ b/pkgs/development/ocaml-modules/react/default.nix
+@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
+     sha256 = "1aj8w79gdd9xnrbz7s5p8glcb4pmimi8jp9f439dqnf6ih3mqb3v";
+   };
+ 
+-  buildInputs = [ ocaml findlib topkg ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib topkg ocamlbuild ];
+ 
+   inherit (topkg) buildPhase installPhase;
+ 
+diff --git a/pkgs/development/ocaml-modules/reactivedata/default.nix b/pkgs/development/ocaml-modules/reactivedata/default.nix
+index bc0c8f9e9b8ca..b4c757bde5bdb 100644
+--- a/pkgs/development/ocaml-modules/reactivedata/default.nix
++++ b/pkgs/development/ocaml-modules/reactivedata/default.nix
+@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-YLkacIbjxZQ/ThgSxjTqviBYih6eW2GX5H7iybQDv1A=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild opaline ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild opaline ];
+   propagatedBuildInputs = [ react ];
+ 
+   buildPhase = "ocaml pkg/build.ml native=true native-dynlink=true";
+diff --git a/pkgs/development/ocaml-modules/rope/default.nix b/pkgs/development/ocaml-modules/rope/default.nix
+index 9410ab21ea34f..2b68b128e3fa2 100644
+--- a/pkgs/development/ocaml-modules/rope/default.nix
++++ b/pkgs/development/ocaml-modules/rope/default.nix
+@@ -30,7 +30,8 @@ stdenv.mkDerivation ({
+     inherit (param) url sha256;
+   };
+ 
+-  buildInputs = [ ocaml findlib benchmark ] ++ param.buildInputs;
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ benchmark ] ++ param.buildInputs;
+ 
+   meta = {
+     homepage = "http://rope.forge.ocamlcore.org/";
+diff --git a/pkgs/development/ocaml-modules/rresult/default.nix b/pkgs/development/ocaml-modules/rresult/default.nix
+index 1198ca957f013..0e314d13939cf 100644
+--- a/pkgs/development/ocaml-modules/rresult/default.nix
++++ b/pkgs/development/ocaml-modules/rresult/default.nix
+@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
+     sha256 = "1k69a3gvrk7f2cshwjzvk7818f0bwxhacgd14wxy6d4gmrggci86";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   propagatedBuildInputs = [ result ];
+ 
+diff --git a/pkgs/development/ocaml-modules/sawja/default.nix b/pkgs/development/ocaml-modules/sawja/default.nix
+index 284ba97b9c703..fc3d3487a3e97 100644
+--- a/pkgs/development/ocaml-modules/sawja/default.nix
++++ b/pkgs/development/ocaml-modules/sawja/default.nix
+@@ -23,9 +23,7 @@ stdenv.mkDerivation {
+     sha256 = "sha256:0k51rscs9mdgpg3qn4cahql5ncdvlb207m015hr8v6r1vfgn0ddq";
+   };
+ 
+-  nativeBuildInputs = [ which ];
+-
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ which ocaml findlib ];
+ 
+   patches = [ ./configure.sh.patch ./Makefile.config.example.patch ];
+ 
+diff --git a/pkgs/development/ocaml-modules/sedlex/default.nix b/pkgs/development/ocaml-modules/sedlex/default.nix
+index c1ea56b5c5067..a444b1b097328 100644
+--- a/pkgs/development/ocaml-modules/sedlex/default.nix
++++ b/pkgs/development/ocaml-modules/sedlex/default.nix
+@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-VhzlDTYBFXgKWT69PqZYLuHkiaDwzhmyX2XfaqzHFl4=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   propagatedBuildInputs = [ gen ocaml-migrate-parsetree ppx_tools_versioned ];
+ 
+diff --git a/pkgs/development/ocaml-modules/sodium/default.nix b/pkgs/development/ocaml-modules/sodium/default.nix
+index cff3d6186d1ac..e119ad3dfb3fb 100644
+--- a/pkgs/development/ocaml-modules/sodium/default.nix
++++ b/pkgs/development/ocaml-modules/sodium/default.nix
+@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
+     ./lib-gen-link-bigarray.patch
+   ];
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+   propagatedBuildInputs = [ ctypes libsodium ];
+ 
+   createFindlibDestdir = true;
+diff --git a/pkgs/development/ocaml-modules/sosa/default.nix b/pkgs/development/ocaml-modules/sosa/default.nix
+index 1605a15bea8ec..307fd55bebf0c 100644
+--- a/pkgs/development/ocaml-modules/sosa/default.nix
++++ b/pkgs/development/ocaml-modules/sosa/default.nix
+@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
+     sha256 = "053hdv6ww0q4mivajj4iyp7krfvgq8zajq9d8x4mia4lid7j0dyk";
+   };
+ 
+-  buildInputs = [ ocaml ocamlbuild findlib ];
++  nativeBuildInputs = [ ocaml ocamlbuild findlib ];
+ 
+   buildPhase = "make build";
+ 
+diff --git a/pkgs/development/ocaml-modules/sqlite3EZ/default.nix b/pkgs/development/ocaml-modules/sqlite3EZ/default.nix
+index 02a281740b9fa..83d9b692f0a3c 100644
+--- a/pkgs/development/ocaml-modules/sqlite3EZ/default.nix
++++ b/pkgs/development/ocaml-modules/sqlite3EZ/default.nix
+@@ -17,7 +17,8 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-pKysvth0efxJeyJQY2Dnqarg7OtsKyyLnFV/1ZhsfDY=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild twt ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ twt ];
+ 
+   propagatedBuildInputs = [ ocaml_sqlite3 ];
+ 
+diff --git a/pkgs/development/ocaml-modules/stdcompat/default.nix b/pkgs/development/ocaml-modules/stdcompat/default.nix
+index 0f3b5377fc519..cc69ace28ccde 100644
+--- a/pkgs/development/ocaml-modules/stdcompat/default.nix
++++ b/pkgs/development/ocaml-modules/stdcompat/default.nix
+@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256:01y67rndjlzfp5zq0gbqpg9skqq2hfbvhbq9lfhhk5xidr98sfj8";
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+   # build fails otherwise
+   enableParallelBuilding = false;
+ 
+diff --git a/pkgs/development/ocaml-modules/tezos/legacy-store.nix b/pkgs/development/ocaml-modules/tezos/legacy-store.nix
+index 6029401e36187..a0d238a327d85 100644
+--- a/pkgs/development/ocaml-modules/tezos/legacy-store.nix
++++ b/pkgs/development/ocaml-modules/tezos/legacy-store.nix
+@@ -23,7 +23,7 @@ buildDunePackage {
+     lwt-watcher
+   ];
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     tezos-protocol-compiler
+   ];
+ 
+diff --git a/pkgs/development/ocaml-modules/tezos/lmdb.nix b/pkgs/development/ocaml-modules/tezos/lmdb.nix
+index 6eaed942317ff..212862ebe5e8b 100644
+--- a/pkgs/development/ocaml-modules/tezos/lmdb.nix
++++ b/pkgs/development/ocaml-modules/tezos/lmdb.nix
+@@ -25,7 +25,7 @@ buildDunePackage {
+ 
+   useDune2 = true;
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     pkg-config
+   ];
+ 
+diff --git a/pkgs/development/ocaml-modules/tezos/protocol-010-PtGRANAD.nix b/pkgs/development/ocaml-modules/tezos/protocol-010-PtGRANAD.nix
+index 2321245220f65..2ef87e2fbcb0c 100644
+--- a/pkgs/development/ocaml-modules/tezos/protocol-010-PtGRANAD.nix
++++ b/pkgs/development/ocaml-modules/tezos/protocol-010-PtGRANAD.nix
+@@ -9,7 +9,7 @@ buildDunePackage {
+   inherit (tezos-stdlib) version useDune2;
+   src = "${tezos-stdlib.base_src}/src";
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     tezos-protocol-compiler
+   ];
+ 
+diff --git a/pkgs/development/ocaml-modules/tezos/protocol-011-PtHangz2.nix b/pkgs/development/ocaml-modules/tezos/protocol-011-PtHangz2.nix
+index 2dec60851770a..8736ad9e534ca 100644
+--- a/pkgs/development/ocaml-modules/tezos/protocol-011-PtHangz2.nix
++++ b/pkgs/development/ocaml-modules/tezos/protocol-011-PtHangz2.nix
+@@ -9,7 +9,7 @@ buildDunePackage {
+   inherit (tezos-stdlib) version useDune2;
+   src = "${tezos-stdlib.base_src}/src";
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     tezos-protocol-compiler
+   ];
+ 
+diff --git a/pkgs/development/ocaml-modules/tezos/store.nix b/pkgs/development/ocaml-modules/tezos/store.nix
+index 69dad75127079..c6f17c97a2b68 100644
+--- a/pkgs/development/ocaml-modules/tezos/store.nix
++++ b/pkgs/development/ocaml-modules/tezos/store.nix
+@@ -31,7 +31,7 @@ buildDunePackage {
+     tezos-legacy-store
+   ];
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     tezos-protocol-compiler
+   ];
+ 
+diff --git a/pkgs/development/ocaml-modules/tezos/validation.nix b/pkgs/development/ocaml-modules/tezos/validation.nix
+index b26b81f4a779f..ec62e9c09bf13 100644
+--- a/pkgs/development/ocaml-modules/tezos/validation.nix
++++ b/pkgs/development/ocaml-modules/tezos/validation.nix
+@@ -14,7 +14,7 @@ buildDunePackage {
+     tezos-protocol-updater
+   ];
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     tezos-protocol-compiler
+   ];
+ 
+diff --git a/pkgs/development/ocaml-modules/tsdl/default.nix b/pkgs/development/ocaml-modules/tsdl/default.nix
+index 7c09e8cd9d7a8..346eea3d33be2 100644
+--- a/pkgs/development/ocaml-modules/tsdl/default.nix
++++ b/pkgs/development/ocaml-modules/tsdl/default.nix
+@@ -18,8 +18,7 @@ stdenv.mkDerivation {
+     sha256 = "1zwv0ixkigh1gzk5n49rwvz2f2m62jdkkqg40j7dclg4gri7691f";
+   };
+ 
+-  nativeBuildInputs = [ pkg-config ];
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ pkg-config ocaml findlib ocamlbuild topkg ];
+   propagatedBuildInputs = [ SDL2 ctypes ];
+ 
+   preConfigure = ''
+diff --git a/pkgs/development/ocaml-modules/twt/default.nix b/pkgs/development/ocaml-modules/twt/default.nix
+index 407601c7a46c8..808bbb42b3b56 100644
+--- a/pkgs/development/ocaml-modules/twt/default.nix
++++ b/pkgs/development/ocaml-modules/twt/default.nix
+@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-xbjLPd7P1KyuC3i6WHLBcdLwd14atcBsd5ER+l97KAk=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   preInstall = ''
+     mkdir -p $out/bin
+diff --git a/pkgs/development/ocaml-modules/type_conv/108.08.00.nix b/pkgs/development/ocaml-modules/type_conv/108.08.00.nix
+index 337874e11a94f..ef39fd337202a 100644
+--- a/pkgs/development/ocaml-modules/type_conv/108.08.00.nix
++++ b/pkgs/development/ocaml-modules/type_conv/108.08.00.nix
+@@ -13,7 +13,8 @@ stdenv.mkDerivation rec {
+     sha256 = "08ysikwwp69zvc147lzzg79nwlrzrk738rj0ggcfadi8h5il42sl";
+   };
+ 
+-  buildInputs = [ ocaml findlib camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ camlp4 ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/type_conv/109.60.01.nix b/pkgs/development/ocaml-modules/type_conv/109.60.01.nix
+index 4ec160a922308..0d47e8949df56 100644
+--- a/pkgs/development/ocaml-modules/type_conv/109.60.01.nix
++++ b/pkgs/development/ocaml-modules/type_conv/109.60.01.nix
+@@ -15,7 +15,8 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-8Oz/fPL3+RghyxQp5u6seSEdf0BgfP6XNcsMYty0rNs=";
+   };
+ 
+-  buildInputs = [ ocaml findlib camlp4 ];
++  nativeBuildInputs = [ ocaml findlib ];
++  buildInputs = [ camlp4 ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/uchar/default.nix b/pkgs/development/ocaml-modules/uchar/default.nix
+index 7d7d87af85328..12eab907205bf 100644
+--- a/pkgs/development/ocaml-modules/uchar/default.nix
++++ b/pkgs/development/ocaml-modules/uchar/default.nix
+@@ -10,7 +10,6 @@ stdenv.mkDerivation rec {
+   };
+ 
+   nativeBuildInputs = [ ocaml ocamlbuild findlib ];
+-  buildInputs = [ findlib ocaml ocamlbuild ];
+   buildPhase = "ocaml pkg/build.ml native=true native-dynlink=${lib.boolToString withShared}";
+   installPhase = "${opaline}/bin/opaline -libdir $OCAMLFIND_DESTDIR";
+   configurePlatforms = [ ];
+diff --git a/pkgs/development/ocaml-modules/ulex/default.nix b/pkgs/development/ocaml-modules/ulex/default.nix
+index f1ada5d099818..f5651577d46a3 100644
+--- a/pkgs/development/ocaml-modules/ulex/default.nix
++++ b/pkgs/development/ocaml-modules/ulex/default.nix
+@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
+ 
+   createFindlibDestdir = true;
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+   propagatedBuildInputs = [ camlp4 ];
+ 
+   buildFlags = [ "all" "all.opt" ];
+diff --git a/pkgs/development/ocaml-modules/uucd/default.nix b/pkgs/development/ocaml-modules/uucd/default.nix
+index 244f3f36dc39a..f17c97c4d9bdf 100644
+--- a/pkgs/development/ocaml-modules/uucd/default.nix
++++ b/pkgs/development/ocaml-modules/uucd/default.nix
+@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256:0fc737v5gj3339jx4x9xr096lxrpwvp6vaiylhavcvsglcwbgm30";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   inherit (topkg) buildPhase installPhase;
+ 
+diff --git a/pkgs/development/ocaml-modules/uucp/default.nix b/pkgs/development/ocaml-modules/uucp/default.nix
+index 2e8a360d4550e..11eb6fdb33f66 100644
+--- a/pkgs/development/ocaml-modules/uucp/default.nix
++++ b/pkgs/development/ocaml-modules/uucp/default.nix
+@@ -21,7 +21,8 @@ stdenv.mkDerivation {
+     sha256 = "sha256:1yx9nih3d9prb9zizq8fzmmqylf24a6yifhf81h33znrj5xn1mpj";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg uutf uunf ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  buildInputs = [ uutf uunf ];
+ 
+   propagatedBuildInputs = [ uchar ];
+ 
+diff --git a/pkgs/development/ocaml-modules/uunf/default.nix b/pkgs/development/ocaml-modules/uunf/default.nix
+index 073e6865fcdd0..2bfb495ad036a 100644
+--- a/pkgs/development/ocaml-modules/uunf/default.nix
++++ b/pkgs/development/ocaml-modules/uunf/default.nix
+@@ -18,7 +18,8 @@ stdenv.mkDerivation {
+     sha256 = "sha256:17wv0nm3vvwcbzb1b09akw8jblmigyhbfmh1sy9lkb5756ni94a2";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg uutf cmdliner ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  buildInputs = [ uutf cmdliner ];
+ 
+   propagatedBuildInputs = [ uchar ];
+ 
+diff --git a/pkgs/development/ocaml-modules/uuseg/default.nix b/pkgs/development/ocaml-modules/uuseg/default.nix
+index 1fbcb57f3a6a5..630c170a49913 100644
+--- a/pkgs/development/ocaml-modules/uuseg/default.nix
++++ b/pkgs/development/ocaml-modules/uuseg/default.nix
+@@ -15,7 +15,8 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256:1g9zyzjkhqxgbb9mh3cgaawscwdazv6y8kdqvmy6yhnimmfqv25p";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild cmdliner topkg uutf ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  buildInputs = [  cmdliner  uutf ];
+   propagatedBuildInputs = [ uucp ];
+ 
+   inherit (topkg) buildPhase installPhase;
+diff --git a/pkgs/development/ocaml-modules/vg/default.nix b/pkgs/development/ocaml-modules/vg/default.nix
+index a9a4c0d3d6b42..84abb7a7478ab 100644
+--- a/pkgs/development/ocaml-modules/vg/default.nix
++++ b/pkgs/development/ocaml-modules/vg/default.nix
+@@ -28,7 +28,7 @@ stdenv.mkDerivation {
+     sha256 = "181sz6l5xrj5jvwg4m2yqsjzwp2s5h8v0mwhjcwbam90kdfx2nak";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   propagatedBuildInputs = [ uchar result gg ]
+                           ++ optionals pdfBackend [ uutf otfm ]
+diff --git a/pkgs/development/ocaml-modules/xml-light/default.nix b/pkgs/development/ocaml-modules/xml-light/default.nix
+index 683d2ec214f1c..6a570c40c8341 100644
+--- a/pkgs/development/ocaml-modules/xml-light/default.nix
++++ b/pkgs/development/ocaml-modules/xml-light/default.nix
+@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
+     sha256 = "sha256-2txmkl/ZN5RGaLQJmr+orqwB4CbFk2RpLJd4gr7kPiE=";
+   };
+ 
+-  buildInputs = [ ocaml findlib ];
++  nativeBuildInputs = [ ocaml findlib ];
+ 
+   createFindlibDestdir = true;
+ 
+diff --git a/pkgs/development/ocaml-modules/xmlm/default.nix b/pkgs/development/ocaml-modules/xmlm/default.nix
+index 43b0bf5faa7e3..a72bd539939ef 100644
+--- a/pkgs/development/ocaml-modules/xmlm/default.nix
++++ b/pkgs/development/ocaml-modules/xmlm/default.nix
+@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
+     sha256 = "1rrdxg5kh9zaqmgapy9bhdqyxbbvxxib3bdfg1vhw4rrkp1z0x8n";
+   };
+ 
+-  buildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+ 
+   inherit (topkg) buildPhase installPhase;
+ 

@@ -1,0 +1,13 @@
+diff --git a/pkgs/build-support/ocaml/dune.nix b/pkgs/build-support/ocaml/dune.nix
+index 6bdec501630..f73bf12ec88 100644
+--- a/pkgs/build-support/ocaml/dune.nix
++++ b/pkgs/build-support/ocaml/dune.nix
+@@ -31,6 +31,8 @@ stdenv.mkDerivation ({
+     runHook postInstall
+   '';
+ 
++  strictDeps = true;
++
+ } // (builtins.removeAttrs args [ "minimalOCamlVersion" ]) // {
+ 
+   name = "ocaml${ocaml.version}-${pname}-${version}";

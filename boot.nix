@@ -13,7 +13,10 @@ let
         src = channel;
         patches = patches;
       };
-  channel = patchChannel system (import ./sources.nix) patches;
+  channel = patchChannel system (import ./sources.nix) [
+    ./native_build_inputs.patch
+    ./dune_strict_deps.patch
+  ];
 
 in
 
