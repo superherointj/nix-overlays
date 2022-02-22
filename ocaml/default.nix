@@ -180,9 +180,12 @@ with oself;
     };
   });
 
+  /*
+  This change is done via a patch
   astring = osuper.astring.overrideAttrs (o: {
     nativeBuildInputs = [ ocaml findlib topkg ocamlbuild ];
   });
+  */
 
   bigstringaf = osuper.bigstringaf.overrideAttrs (o: {
     nativeBuildInputs = o.nativeBuildInputs ++ [ pkg-config-script pkg-config ];
