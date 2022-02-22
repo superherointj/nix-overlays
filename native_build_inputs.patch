@@ -1,4 +1,4 @@
-From d22df66effd0393cea6c7f7b7c991f6cc02bbcaa Mon Sep 17 00:00:00 2001
+From 7ec15881d669c2a58be4cde6ad907770e80e6e85 Mon Sep 17 00:00:00 2001
 From: Ulrik Strid <ulrik.strid@outlook.com>
 Date: Tue, 22 Feb 2022 10:59:04 +0100
 Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
@@ -6,7 +6,7 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
 
 ---
  pkgs/development/ocaml-modules/apron/default.nix            | 3 ++-
- pkgs/development/ocaml-modules/astring/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/astring/default.nix          | 3 ++-
  pkgs/development/ocaml-modules/atd/default.nix              | 2 +-
  pkgs/development/ocaml-modules/bap/default.nix              | 5 ++---
  pkgs/development/ocaml-modules/batteries/default.nix        | 2 +-
@@ -14,6 +14,7 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  pkgs/development/ocaml-modules/biniou/1.0.nix               | 3 ++-
  pkgs/development/ocaml-modules/bitv/default.nix             | 2 +-
  pkgs/development/ocaml-modules/bolt/default.nix             | 3 ++-
+ pkgs/development/ocaml-modules/bos/default.nix              | 2 +-
  pkgs/development/ocaml-modules/bz2/default.nix              | 3 ---
  pkgs/development/ocaml-modules/calendar/default.nix         | 2 +-
  pkgs/development/ocaml-modules/camlpdf/default.nix          | 2 +-
@@ -37,20 +38,22 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  pkgs/development/ocaml-modules/expat/0.9.nix                | 3 ++-
  pkgs/development/ocaml-modules/expat/default.nix            | 3 ++-
  pkgs/development/ocaml-modules/extlib/default.nix           | 2 +-
- pkgs/development/ocaml-modules/farfadet/default.nix         | 2 +-
+ pkgs/development/ocaml-modules/farfadet/default.nix         | 3 ++-
+ pkgs/development/ocaml-modules/fmt/default.nix              | 2 +-
  pkgs/development/ocaml-modules/fontconfig/default.nix       | 4 ++--
- pkgs/development/ocaml-modules/fpath/default.nix            | 2 +-
+ pkgs/development/ocaml-modules/fpath/default.nix            | 3 ++-
  pkgs/development/ocaml-modules/frontc/default.nix           | 2 +-
  pkgs/development/ocaml-modules/functory/default.nix         | 2 +-
  pkgs/development/ocaml-modules/getopt/default.nix           | 2 +-
  pkgs/development/ocaml-modules/gg/default.nix               | 2 +-
  pkgs/development/ocaml-modules/gmetadom/default.nix         | 4 ++--
  pkgs/development/ocaml-modules/hacl-star/default.nix        | 2 +-
- pkgs/development/ocaml-modules/hmap/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/hmap/default.nix             | 3 ++-
  pkgs/development/ocaml-modules/inifiles/default.nix         | 2 +-
  pkgs/development/ocaml-modules/inotify/default.nix          | 3 ++-
  pkgs/development/ocaml-modules/iso8601/default.nix          | 2 +-
  pkgs/development/ocaml-modules/javalib/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/jsonm/default.nix            | 2 +-
  pkgs/development/ocaml-modules/lablgl/default.nix           | 3 ++-
  pkgs/development/ocaml-modules/lablgtk-extras/1.4.nix       | 3 ++-
  pkgs/development/ocaml-modules/lablgtk-extras/default.nix   | 3 ++-
@@ -58,13 +61,19 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  pkgs/development/ocaml-modules/lablgtk/default.nix          | 4 ++--
  pkgs/development/ocaml-modules/labltk/default.nix           | 3 ++-
  pkgs/development/ocaml-modules/llvm/default.nix             | 4 ++--
+ pkgs/development/ocaml-modules/logs/default.nix             | 2 +-
  pkgs/development/ocaml-modules/lua-ml/default.nix           | 3 +--
  pkgs/development/ocaml-modules/macaque/default.nix          | 3 ++-
  pkgs/development/ocaml-modules/magick/default.nix           | 4 ++--
+ pkgs/development/ocaml-modules/mirage-crypto/default.nix    | 3 ++-
+ pkgs/development/ocaml-modules/mirage-crypto/ec.nix         | 2 ++
+ pkgs/development/ocaml-modules/mirage-crypto/rng-async.nix  | 2 +-
+ pkgs/development/ocaml-modules/mirage-crypto/rng.nix        | 2 +-
  pkgs/development/ocaml-modules/mlgmp/default.nix            | 3 ++-
  pkgs/development/ocaml-modules/mlgmpidl/default.nix         | 3 ++-
+ pkgs/development/ocaml-modules/mtime/default.nix            | 3 +--
  pkgs/development/ocaml-modules/mysql/default.nix            | 2 +-
- pkgs/development/ocaml-modules/nocrypto/default.nix         | 4 ++--
+ pkgs/development/ocaml-modules/nocrypto/default.nix         | 2 +-
  pkgs/development/ocaml-modules/notty/default.nix            | 3 ++-
  pkgs/development/ocaml-modules/num/default.nix              | 1 -
  pkgs/development/ocaml-modules/ocaml-cairo/default.nix      | 5 ++---
@@ -81,17 +90,19 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  pkgs/development/ocaml-modules/ocurl/default.nix            | 4 +++-
  pkgs/development/ocaml-modules/odn/default.nix              | 3 ++-
  pkgs/development/ocaml-modules/omd/default.nix              | 2 +-
- pkgs/development/ocaml-modules/otfm/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/otfm/default.nix             | 3 ++-
+ pkgs/development/ocaml-modules/ounit/default.nix            | 2 +-
  pkgs/development/ocaml-modules/piqi-ocaml/default.nix       | 3 ++-
  pkgs/development/ocaml-modules/piqi/default.nix             | 2 +-
  pkgs/development/ocaml-modules/ppx_cstubs/default.nix       | 3 ++-
  pkgs/development/ocaml-modules/ppx_tools/default.nix        | 1 -
+ pkgs/development/ocaml-modules/ptime/default.nix            | 3 +--
  pkgs/development/ocaml-modules/pycaml/default.nix           | 3 ++-
  pkgs/development/ocaml-modules/pyml/default.nix             | 4 +++-
- pkgs/development/ocaml-modules/react/default.nix            | 2 +-
+ pkgs/development/ocaml-modules/react/default.nix            | 3 ++-
  pkgs/development/ocaml-modules/reactivedata/default.nix     | 2 +-
  pkgs/development/ocaml-modules/rope/default.nix             | 3 ++-
- pkgs/development/ocaml-modules/rresult/default.nix          | 2 +-
+ pkgs/development/ocaml-modules/rresult/default.nix          | 3 ++-
  pkgs/development/ocaml-modules/sawja/default.nix            | 4 +---
  pkgs/development/ocaml-modules/sedlex/default.nix           | 2 +-
  pkgs/development/ocaml-modules/sodium/default.nix           | 2 +-
@@ -104,20 +115,24 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  .../ocaml-modules/tezos/protocol-011-PtHangz2.nix           | 2 +-
  pkgs/development/ocaml-modules/tezos/store.nix              | 2 +-
  pkgs/development/ocaml-modules/tezos/validation.nix         | 2 +-
- pkgs/development/ocaml-modules/tsdl/default.nix             | 3 +--
+ pkgs/development/ocaml-modules/torch/default.nix            | 3 +--
+ pkgs/development/ocaml-modules/tsdl/default.nix             | 4 ++--
  pkgs/development/ocaml-modules/twt/default.nix              | 2 +-
  pkgs/development/ocaml-modules/type_conv/108.08.00.nix      | 3 ++-
  pkgs/development/ocaml-modules/type_conv/109.60.01.nix      | 3 ++-
  pkgs/development/ocaml-modules/uchar/default.nix            | 1 -
  pkgs/development/ocaml-modules/ulex/default.nix             | 2 +-
- pkgs/development/ocaml-modules/uucd/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/uucd/default.nix             | 3 ++-
  pkgs/development/ocaml-modules/uucp/default.nix             | 3 ++-
  pkgs/development/ocaml-modules/uunf/default.nix             | 3 ++-
  pkgs/development/ocaml-modules/uuseg/default.nix            | 3 ++-
- pkgs/development/ocaml-modules/vg/default.nix               | 2 +-
+ pkgs/development/ocaml-modules/uutf/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/vg/default.nix               | 3 ++-
+ pkgs/development/ocaml-modules/webbrowser/default.nix       | 4 ++--
  pkgs/development/ocaml-modules/xml-light/default.nix        | 2 +-
- pkgs/development/ocaml-modules/xmlm/default.nix             | 2 +-
- 112 files changed, 161 insertions(+), 136 deletions(-)
+ pkgs/development/ocaml-modules/xmlm/default.nix             | 3 ++-
+ pkgs/development/ocaml-modules/z3/default.nix               | 2 +-
+ 127 files changed, 189 insertions(+), 153 deletions(-)
 
 diff --git a/pkgs/development/ocaml-modules/apron/default.nix b/pkgs/development/ocaml-modules/apron/default.nix
 index c9edfd62e06d9..44f71ceb542e1 100644
@@ -134,15 +149,16 @@ index c9edfd62e06d9..44f71ceb542e1 100644
  
    outputs = [ "out" "bin" "dev" ];
 diff --git a/pkgs/development/ocaml-modules/astring/default.nix b/pkgs/development/ocaml-modules/astring/default.nix
-index 8ecac1c124d6c..d08bea75bc5c1 100644
+index 8ecac1c124d6c..11ba910273208 100644
 --- a/pkgs/development/ocaml-modules/astring/default.nix
 +++ b/pkgs/development/ocaml-modules/astring/default.nix
-@@ -22,7 +22,7 @@ stdenv.mkDerivation {
+@@ -22,7 +22,8 @@ stdenv.mkDerivation {
      inherit (param) sha256;
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    inherit (topkg) buildPhase installPhase;
  
@@ -244,6 +260,19 @@ index a6b63676e775c..bc453653c633b 100644
  
    patches = [
      (fetchpatch {
+diff --git a/pkgs/development/ocaml-modules/bos/default.nix b/pkgs/development/ocaml-modules/bos/default.nix
+index 17a0185829e9d..ab3af400d4140 100644
+--- a/pkgs/development/ocaml-modules/bos/default.nix
++++ b/pkgs/development/ocaml-modules/bos/default.nix
+@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
+   };
+ 
+   nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+-  buildInputs = [ findlib topkg ];
++  buildInputs = [ topkg ];
+   propagatedBuildInputs = [ astring fmt fpath logs rresult ];
+ 
+   inherit (topkg) buildPhase installPhase;
 diff --git a/pkgs/development/ocaml-modules/bz2/default.nix b/pkgs/development/ocaml-modules/bz2/default.nix
 index 617715fc6edcd..08e80b10da666 100644
 --- a/pkgs/development/ocaml-modules/bz2/default.nix
@@ -563,18 +592,32 @@ index d1860788838a9..75f4f282005f7 100644
    createFindlibDestdir = true;
  
 diff --git a/pkgs/development/ocaml-modules/farfadet/default.nix b/pkgs/development/ocaml-modules/farfadet/default.nix
-index 79b742da575d8..2e7009942a953 100644
+index 79b742da575d8..0b8087c8cc3c9 100644
 --- a/pkgs/development/ocaml-modules/farfadet/default.nix
 +++ b/pkgs/development/ocaml-modules/farfadet/default.nix
-@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
+@@ -15,7 +15,8 @@ stdenv.mkDerivation rec {
      sha256 = "0nlafnp0pwx0n4aszpsk6nvcvqi9im306p4jhx70si7k3xprlr2j";
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    propagatedBuildInputs = [ faraday ];
  
+diff --git a/pkgs/development/ocaml-modules/fmt/default.nix b/pkgs/development/ocaml-modules/fmt/default.nix
+index a66976b4a2b54..43d89974abfce 100644
+--- a/pkgs/development/ocaml-modules/fmt/default.nix
++++ b/pkgs/development/ocaml-modules/fmt/default.nix
+@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
+   };
+ 
+   nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+-  buildInputs = [ findlib topkg cmdliner ];
++  buildInputs = [ cmdliner topkg ];
+   propagatedBuildInputs = [ seq stdlib-shims ];
+ 
+   inherit (topkg) buildPhase installPhase;
 diff --git a/pkgs/development/ocaml-modules/fontconfig/default.nix b/pkgs/development/ocaml-modules/fontconfig/default.nix
 index f4afe80d532d5..adcf010ebf852 100644
 --- a/pkgs/development/ocaml-modules/fontconfig/default.nix
@@ -591,15 +634,16 @@ index f4afe80d532d5..adcf010ebf852 100644
      "OCAML_STDLIB_DIR=$(out)/lib/ocaml/${lib.getVersion ocaml}/site-lib/"
      "OCAML_HAVE_OCAMLOPT=yes"
 diff --git a/pkgs/development/ocaml-modules/fpath/default.nix b/pkgs/development/ocaml-modules/fpath/default.nix
-index 532210888bf38..e620f4f574542 100644
+index 532210888bf38..65acfe3978cdd 100644
 --- a/pkgs/development/ocaml-modules/fpath/default.nix
 +++ b/pkgs/development/ocaml-modules/fpath/default.nix
-@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
+@@ -13,7 +13,8 @@ stdenv.mkDerivation rec {
      sha256 = "03z7mj0sqdz465rc4drj1gr88l9q3nfs374yssvdjdyhjbqqzc0j";
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    propagatedBuildInputs = [ astring ];
  
@@ -684,15 +728,16 @@ index 8a29439c7a599..d8c3593a7c883 100644
    ];
  }
 diff --git a/pkgs/development/ocaml-modules/hmap/default.nix b/pkgs/development/ocaml-modules/hmap/default.nix
-index 67622a8ef6a0f..d903d97abb03d 100644
+index 67622a8ef6a0f..5f6c81591054d 100644
 --- a/pkgs/development/ocaml-modules/hmap/default.nix
 +++ b/pkgs/development/ocaml-modules/hmap/default.nix
-@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
+@@ -22,7 +22,8 @@ stdenv.mkDerivation rec {
      sha256 = "10xyjy4ab87z7jnghy0wnla9wrmazgyhdwhr4hdmxxdn28dxn03a";
    };
  
 -  buildInputs = [ ocaml ocamlbuild findlib topkg ];
-+  nativeBuildInputs = [ ocaml ocamlbuild findlib topkg ];
++  nativeBuildInputs = [ ocaml ocamlbuild findlib ];
++  buildInputs = [ topkg ];
  
    inherit (topkg) installPhase;
  
@@ -749,6 +794,20 @@ index 78b61de8d9c11..7bae4f5fec97c 100644
  
    patches = [ ./configure.sh.patch ./Makefile.config.example.patch ];
  
+diff --git a/pkgs/development/ocaml-modules/jsonm/default.nix b/pkgs/development/ocaml-modules/jsonm/default.nix
+index c228242fda9ea..c8f64bf94e7fe 100644
+--- a/pkgs/development/ocaml-modules/jsonm/default.nix
++++ b/pkgs/development/ocaml-modules/jsonm/default.nix
+@@ -9,8 +9,8 @@ stdenv.mkDerivation rec {
+     sha256 = "1176dcmxb11fnw49b7yysvkjh0kpzx4s48lmdn5psq9vshp5c29w";
+   };
+ 
+-  buildInputs = [ findlib topkg ];
+   nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
+   propagatedBuildInputs = [ uutf ];
+ 
+   inherit (topkg) buildPhase installPhase;
 diff --git a/pkgs/development/ocaml-modules/lablgl/default.nix b/pkgs/development/ocaml-modules/lablgl/default.nix
 index da4318aef4c13..85c27f93a0918 100644
 --- a/pkgs/development/ocaml-modules/lablgl/default.nix
@@ -850,6 +909,19 @@ index 264d95f39f67e..61ef0e950c374 100644
    propagatedBuildInputs = [ libllvm ];
  
    cmakeFlags = [
+diff --git a/pkgs/development/ocaml-modules/logs/default.nix b/pkgs/development/ocaml-modules/logs/default.nix
+index 157e7c52fee12..1b13533d04db9 100644
+--- a/pkgs/development/ocaml-modules/logs/default.nix
++++ b/pkgs/development/ocaml-modules/logs/default.nix
+@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
+   };
+ 
+   nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+-  buildInputs = [ findlib topkg fmt cmdliner lwt ]
++  buildInputs = [ fmt cmdliner lwt topkg ]
+     ++ lib.optional jsooSupport js_of_ocaml;
+   propagatedBuildInputs = [ result ];
+ 
 diff --git a/pkgs/development/ocaml-modules/lua-ml/default.nix b/pkgs/development/ocaml-modules/lua-ml/default.nix
 index 8a4f58ccbbd79..cc3de3807a1fb 100644
 --- a/pkgs/development/ocaml-modules/lua-ml/default.nix
@@ -893,6 +965,59 @@ index f9fec120a6257..2625b16ff3b40 100644
  
    createFindlibDestdir = true;
  
+diff --git a/pkgs/development/ocaml-modules/mirage-crypto/default.nix b/pkgs/development/ocaml-modules/mirage-crypto/default.nix
+index 102d3d2de07ee..be571c3f7e002 100644
+--- a/pkgs/development/ocaml-modules/mirage-crypto/default.nix
++++ b/pkgs/development/ocaml-modules/mirage-crypto/default.nix
+@@ -19,7 +19,8 @@ buildDunePackage rec {
+   doCheck = true;
+   checkInputs = [ ounit ];
+ 
+-  nativeBuildInputs = [ dune-configurator pkg-config ];
++  nativeBuildInputs = [ pkg-config ];
++  buildInputs = [ dune-configurator  ];
+   propagatedBuildInputs = [
+     cstruct eqaf
+   ] ++ lib.optionals withFreestanding [
+diff --git a/pkgs/development/ocaml-modules/mirage-crypto/ec.nix b/pkgs/development/ocaml-modules/mirage-crypto/ec.nix
+index bcd7a1f04f25e..cfd3559bd2d55 100644
+--- a/pkgs/development/ocaml-modules/mirage-crypto/ec.nix
++++ b/pkgs/development/ocaml-modules/mirage-crypto/ec.nix
+@@ -28,6 +28,8 @@ buildDunePackage {
+ 
+   nativeBuildInputs = [
+     pkg-config
++  ];
++  buildInputs = [
+     dune-configurator
+   ];
+   propagatedBuildInputs = [
+diff --git a/pkgs/development/ocaml-modules/mirage-crypto/rng-async.nix b/pkgs/development/ocaml-modules/mirage-crypto/rng-async.nix
+index e8c8dd06eab52..fb9e25d8da1dc 100644
+--- a/pkgs/development/ocaml-modules/mirage-crypto/rng-async.nix
++++ b/pkgs/development/ocaml-modules/mirage-crypto/rng-async.nix
+@@ -8,7 +8,7 @@ buildDunePackage {
+ 
+   inherit (mirage-crypto) useDune2 version minimumOCamlVersion src;
+ 
+-  nativeBuildInputs = [
++  buildInputs = [
+     dune-configurator
+   ];
+ 
+diff --git a/pkgs/development/ocaml-modules/mirage-crypto/rng.nix b/pkgs/development/ocaml-modules/mirage-crypto/rng.nix
+index b4da068163510..4923070ab3c29 100644
+--- a/pkgs/development/ocaml-modules/mirage-crypto/rng.nix
++++ b/pkgs/development/ocaml-modules/mirage-crypto/rng.nix
+@@ -9,7 +9,7 @@ buildDunePackage {
+   doCheck = true;
+   checkInputs = [ ounit randomconv ];
+ 
+-  nativeBuildInputs = [ dune-configurator ];
++  buildInputs = [ dune-configurator ];
+   propagatedBuildInputs = [ cstruct mirage-crypto duration logs mtime ocaml_lwt ];
+ 
+   meta = mirage-crypto.meta // {
 diff --git a/pkgs/development/ocaml-modules/mlgmp/default.nix b/pkgs/development/ocaml-modules/mlgmp/default.nix
 index ffd78150689a2..322c0045747e5 100644
 --- a/pkgs/development/ocaml-modules/mlgmp/default.nix
@@ -921,6 +1046,20 @@ index 4e27c8ff3bb71..a168ade71dea1 100644
  
    prefixKey = "-prefix ";
    configureFlags = [
+diff --git a/pkgs/development/ocaml-modules/mtime/default.nix b/pkgs/development/ocaml-modules/mtime/default.nix
+index 3e4438f6da58c..19949c352e360 100644
+--- a/pkgs/development/ocaml-modules/mtime/default.nix
++++ b/pkgs/development/ocaml-modules/mtime/default.nix
+@@ -25,8 +25,7 @@ stdenv.mkDerivation {
+   };
+ 
+   nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+-  buildInputs = [ findlib topkg ]
+-  ++ optional jsooSupport js_of_ocaml;
++  buildInputs = [ topkg ] ++ optional jsooSupport js_of_ocaml;
+ 
+   buildPhase = "${topkg.buildPhase} --with-js_of_ocaml ${boolToString jsooSupport}";
+ 
 diff --git a/pkgs/development/ocaml-modules/mysql/default.nix b/pkgs/development/ocaml-modules/mysql/default.nix
 index 6ccdfa9cf81c6..584a16e1d3923 100644
 --- a/pkgs/development/ocaml-modules/mysql/default.nix
@@ -935,22 +1074,20 @@ index 6ccdfa9cf81c6..584a16e1d3923 100644
    createFindlibDestdir = true;
  
 diff --git a/pkgs/development/ocaml-modules/nocrypto/default.nix b/pkgs/development/ocaml-modules/nocrypto/default.nix
-index fdd24094c17b6..8350b37ed0b2a 100644
+index fdd24094c17b6..af841a422bc1d 100644
 --- a/pkgs/development/ocaml-modules/nocrypto/default.nix
 +++ b/pkgs/development/ocaml-modules/nocrypto/default.nix
-@@ -55,8 +55,8 @@ stdenv.mkDerivation rec {
-     })
+@@ -56,7 +56,7 @@ stdenv.mkDerivation rec {
    ];
  
--  nativeBuildInputs = [ ocaml findlib ocamlbuild cc-wrapper ];
+   nativeBuildInputs = [ ocaml findlib ocamlbuild cc-wrapper ];
 -  buildInputs = [ ocamlbuild findlib topkg cpuid ocb-stubblr ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild cc-wrapper ocb-stubblr ];
-+  buildInputs = [ cpuid ];
++  buildInputs = [ topkg cpuid ocb-stubblr ];
    propagatedBuildInputs = [ cstruct ppx_deriving ppx_sexp_conv sexplib zarith ] ++ optional withLwt cstruct-lwt;
  
    buildPhase = "${topkg.buildPhase} --accelerate false --with-lwt ${boolToString withLwt}";
 diff --git a/pkgs/development/ocaml-modules/notty/default.nix b/pkgs/development/ocaml-modules/notty/default.nix
-index 94342bb31282f..244dcdb9627b5 100644
+index 94342bb31282f..88240d0d19ff0 100644
 --- a/pkgs/development/ocaml-modules/notty/default.nix
 +++ b/pkgs/development/ocaml-modules/notty/default.nix
 @@ -19,7 +19,8 @@ stdenv.mkDerivation rec {
@@ -958,8 +1095,8 @@ index 94342bb31282f..244dcdb9627b5 100644
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ocb-stubblr ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  buildInputs = [ ocb-stubblr ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ ocb-stubblr topkg ];
    propagatedBuildInputs = [ result uucp uuseg uutf ] ++
                            optional withLwt lwt;
  
@@ -1175,18 +1312,32 @@ index d6cea183d85cc..2664c0a075c9e 100644
    createFindlibDestdir = true;
  
 diff --git a/pkgs/development/ocaml-modules/otfm/default.nix b/pkgs/development/ocaml-modules/otfm/default.nix
-index 0642b30699c2e..0229ca8ef20b9 100644
+index 0642b30699c2e..8e857bfc9cbc8 100644
 --- a/pkgs/development/ocaml-modules/otfm/default.nix
 +++ b/pkgs/development/ocaml-modules/otfm/default.nix
-@@ -17,7 +17,7 @@ stdenv.mkDerivation {
+@@ -17,7 +17,8 @@ stdenv.mkDerivation {
      sha256 = "054s82539k3kc9na6s47g3scsl04icjahpas7pv5351jmsgqcq3k";
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    propagatedBuildInputs = [ uutf result ];
  
+diff --git a/pkgs/development/ocaml-modules/ounit/default.nix b/pkgs/development/ocaml-modules/ounit/default.nix
+index fbb75e613309f..7ac00a37e0fef 100644
+--- a/pkgs/development/ocaml-modules/ounit/default.nix
++++ b/pkgs/development/ocaml-modules/ounit/default.nix
+@@ -4,7 +4,7 @@ stdenv.mkDerivation {
+   pname = "ocaml${ocaml.version}-ounit";
+   inherit (ounit2) version src meta;
+ 
+-  buildInputs = [ findlib ];
++  nativeBuildInputs = [ findlib ];
+   propagatedBuildInputs = [ ounit2 ];
+ 
+   dontBuild = true;
 diff --git a/pkgs/development/ocaml-modules/piqi-ocaml/default.nix b/pkgs/development/ocaml-modules/piqi-ocaml/default.nix
 index 590c001c41950..d977ef0437ce5 100644
 --- a/pkgs/development/ocaml-modules/piqi-ocaml/default.nix
@@ -1243,6 +1394,20 @@ index 64948c29ae500..07547cbd29786 100644
  
      createFindlibDestdir = true;
  
+diff --git a/pkgs/development/ocaml-modules/ptime/default.nix b/pkgs/development/ocaml-modules/ptime/default.nix
+index 7015c6058b4fa..3902b9ef6ed02 100644
+--- a/pkgs/development/ocaml-modules/ptime/default.nix
++++ b/pkgs/development/ocaml-modules/ptime/default.nix
+@@ -12,8 +12,7 @@ stdenv.mkDerivation rec {
+   };
+ 
+   nativeBuildInputs = [ ocaml findlib ocamlbuild ];
+-  buildInputs = [ findlib topkg ]
+-    ++ lib.optional jsooSupport js_of_ocaml;
++  buildInputs = [ topkg ] ++ lib.optional jsooSupport js_of_ocaml;
+ 
+   propagatedBuildInputs = [ result ];
+ 
 diff --git a/pkgs/development/ocaml-modules/pycaml/default.nix b/pkgs/development/ocaml-modules/pycaml/default.nix
 index c19b40eb9afe7..06d4d6557ea88 100644
 --- a/pkgs/development/ocaml-modules/pycaml/default.nix
@@ -1275,15 +1440,16 @@ index 7bc794fa24876..c1fbb7c14c783 100644
      ncurses
    ];
 diff --git a/pkgs/development/ocaml-modules/react/default.nix b/pkgs/development/ocaml-modules/react/default.nix
-index 0edae98306988..9a5a60a68f8d2 100644
+index 0edae98306988..ed4317655aa96 100644
 --- a/pkgs/development/ocaml-modules/react/default.nix
 +++ b/pkgs/development/ocaml-modules/react/default.nix
-@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
+@@ -9,7 +9,8 @@ stdenv.mkDerivation rec {
      sha256 = "1aj8w79gdd9xnrbz7s5p8glcb4pmimi8jp9f439dqnf6ih3mqb3v";
    };
  
 -  buildInputs = [ ocaml findlib topkg ocamlbuild ];
-+  nativeBuildInputs = [ ocaml findlib topkg ocamlbuild ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    inherit (topkg) buildPhase installPhase;
  
@@ -1315,15 +1481,16 @@ index 9410ab21ea34f..2b68b128e3fa2 100644
    meta = {
      homepage = "http://rope.forge.ocamlcore.org/";
 diff --git a/pkgs/development/ocaml-modules/rresult/default.nix b/pkgs/development/ocaml-modules/rresult/default.nix
-index 1198ca957f013..0e314d13939cf 100644
+index 1198ca957f013..d05132aeeabde 100644
 --- a/pkgs/development/ocaml-modules/rresult/default.nix
 +++ b/pkgs/development/ocaml-modules/rresult/default.nix
-@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
+@@ -8,7 +8,8 @@ stdenv.mkDerivation rec {
      sha256 = "1k69a3gvrk7f2cshwjzvk7818f0bwxhacgd14wxy6d4gmrggci86";
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    propagatedBuildInputs = [ result ];
  
@@ -1486,17 +1653,39 @@ index b26b81f4a779f..ec62e9c09bf13 100644
      tezos-protocol-compiler
    ];
  
+diff --git a/pkgs/development/ocaml-modules/torch/default.nix b/pkgs/development/ocaml-modules/torch/default.nix
+index 1cf84dd4938e9..76c3c501df668 100644
+--- a/pkgs/development/ocaml-modules/torch/default.nix
++++ b/pkgs/development/ocaml-modules/torch/default.nix
+@@ -30,7 +30,7 @@ buildDunePackage rec {
+     sha256 = "0528h1mkrqbmbf7hy91dsnxcg0k55m3jgharr71c652xyd847yz7";
+   };
+ 
+-  buildInputs = [ dune-configurator ];
++  buildInputs = [ dune-configurator pytorch.dev ];
+ 
+   propagatedBuildInputs = [
+     cmdliner
+@@ -38,7 +38,6 @@ buildDunePackage rec {
+     npy
+     ocaml-compiler-libs
+     pytorch
+-    pytorch.dev
+     ppx_custom_printf
+     ppx_expect
+     ppx_sexp_conv
 diff --git a/pkgs/development/ocaml-modules/tsdl/default.nix b/pkgs/development/ocaml-modules/tsdl/default.nix
-index 7c09e8cd9d7a8..346eea3d33be2 100644
+index 7c09e8cd9d7a8..6bf500e0ef991 100644
 --- a/pkgs/development/ocaml-modules/tsdl/default.nix
 +++ b/pkgs/development/ocaml-modules/tsdl/default.nix
-@@ -18,8 +18,7 @@ stdenv.mkDerivation {
+@@ -18,8 +18,8 @@ stdenv.mkDerivation {
      sha256 = "1zwv0ixkigh1gzk5n49rwvz2f2m62jdkkqg40j7dclg4gri7691f";
    };
  
 -  nativeBuildInputs = [ pkg-config ];
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ pkg-config ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ pkg-config ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
    propagatedBuildInputs = [ SDL2 ctypes ];
  
    preConfigure = ''
@@ -1567,20 +1756,21 @@ index f1ada5d099818..f5651577d46a3 100644
  
    buildFlags = [ "all" "all.opt" ];
 diff --git a/pkgs/development/ocaml-modules/uucd/default.nix b/pkgs/development/ocaml-modules/uucd/default.nix
-index 244f3f36dc39a..f17c97c4d9bdf 100644
+index 244f3f36dc39a..6f0a0f63f8026 100644
 --- a/pkgs/development/ocaml-modules/uucd/default.nix
 +++ b/pkgs/development/ocaml-modules/uucd/default.nix
-@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
+@@ -13,7 +13,8 @@ stdenv.mkDerivation rec {
      sha256 = "sha256:0fc737v5gj3339jx4x9xr096lxrpwvp6vaiylhavcvsglcwbgm30";
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    inherit (topkg) buildPhase installPhase;
  
 diff --git a/pkgs/development/ocaml-modules/uucp/default.nix b/pkgs/development/ocaml-modules/uucp/default.nix
-index 2e8a360d4550e..11eb6fdb33f66 100644
+index 2e8a360d4550e..b5a721e71b931 100644
 --- a/pkgs/development/ocaml-modules/uucp/default.nix
 +++ b/pkgs/development/ocaml-modules/uucp/default.nix
 @@ -21,7 +21,8 @@ stdenv.mkDerivation {
@@ -1588,13 +1778,13 @@ index 2e8a360d4550e..11eb6fdb33f66 100644
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg uutf uunf ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  buildInputs = [ uutf uunf ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg uutf uunf ];
  
    propagatedBuildInputs = [ uchar ];
  
 diff --git a/pkgs/development/ocaml-modules/uunf/default.nix b/pkgs/development/ocaml-modules/uunf/default.nix
-index 073e6865fcdd0..2bfb495ad036a 100644
+index 073e6865fcdd0..fd55b537776a3 100644
 --- a/pkgs/development/ocaml-modules/uunf/default.nix
 +++ b/pkgs/development/ocaml-modules/uunf/default.nix
 @@ -18,7 +18,8 @@ stdenv.mkDerivation {
@@ -1602,13 +1792,13 @@ index 073e6865fcdd0..2bfb495ad036a 100644
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg uutf cmdliner ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  buildInputs = [ uutf cmdliner ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg uutf cmdliner ];
  
    propagatedBuildInputs = [ uchar ];
  
 diff --git a/pkgs/development/ocaml-modules/uuseg/default.nix b/pkgs/development/ocaml-modules/uuseg/default.nix
-index 1fbcb57f3a6a5..630c170a49913 100644
+index 1fbcb57f3a6a5..0ec72126a5a99 100644
 --- a/pkgs/development/ocaml-modules/uuseg/default.nix
 +++ b/pkgs/development/ocaml-modules/uuseg/default.nix
 @@ -15,7 +15,8 @@ stdenv.mkDerivation rec {
@@ -1616,24 +1806,53 @@ index 1fbcb57f3a6a5..630c170a49913 100644
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild cmdliner topkg uutf ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  buildInputs = [  cmdliner  uutf ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [  topkg cmdliner  uutf ];
    propagatedBuildInputs = [ uucp ];
  
    inherit (topkg) buildPhase installPhase;
+diff --git a/pkgs/development/ocaml-modules/uutf/default.nix b/pkgs/development/ocaml-modules/uutf/default.nix
+index e8179e369afa0..6dce2a6013cf4 100644
+--- a/pkgs/development/ocaml-modules/uutf/default.nix
++++ b/pkgs/development/ocaml-modules/uutf/default.nix
+@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
+   };
+ 
+   nativeBuildInputs = [ ocaml ocamlbuild findlib ];
+-  buildInputs = [ findlib topkg cmdliner ];
++  buildInputs = [ topkg cmdliner ];
+   propagatedBuildInputs = [ uchar ];
+ 
+   inherit (topkg) buildPhase installPhase;
 diff --git a/pkgs/development/ocaml-modules/vg/default.nix b/pkgs/development/ocaml-modules/vg/default.nix
-index a9a4c0d3d6b42..84abb7a7478ab 100644
+index a9a4c0d3d6b42..3b706485581fe 100644
 --- a/pkgs/development/ocaml-modules/vg/default.nix
 +++ b/pkgs/development/ocaml-modules/vg/default.nix
-@@ -28,7 +28,7 @@ stdenv.mkDerivation {
+@@ -28,7 +28,8 @@ stdenv.mkDerivation {
      sha256 = "181sz6l5xrj5jvwg4m2yqsjzwp2s5h8v0mwhjcwbam90kdfx2nak";
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    propagatedBuildInputs = [ uchar result gg ]
                            ++ optionals pdfBackend [ uutf otfm ]
+diff --git a/pkgs/development/ocaml-modules/webbrowser/default.nix b/pkgs/development/ocaml-modules/webbrowser/default.nix
+index 6a21a1e1f751f..b69bec724c631 100644
+--- a/pkgs/development/ocaml-modules/webbrowser/default.nix
++++ b/pkgs/development/ocaml-modules/webbrowser/default.nix
+@@ -10,8 +10,8 @@ stdenv.mkDerivation rec {
+     sha256 = "137a948bx7b71zfv4za3hhznrn5lzbbrgzjy0das83zms508isx3";
+   };
+ 
+-  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
+-  buildInputs = [];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
+   propagatedBuildInputs = [ astring bos cmdliner rresult ];
+ 
+   inherit (topkg) buildPhase installPhase;
 diff --git a/pkgs/development/ocaml-modules/xml-light/default.nix b/pkgs/development/ocaml-modules/xml-light/default.nix
 index 683d2ec214f1c..6a570c40c8341 100644
 --- a/pkgs/development/ocaml-modules/xml-light/default.nix
@@ -1648,15 +1867,29 @@ index 683d2ec214f1c..6a570c40c8341 100644
    createFindlibDestdir = true;
  
 diff --git a/pkgs/development/ocaml-modules/xmlm/default.nix b/pkgs/development/ocaml-modules/xmlm/default.nix
-index 43b0bf5faa7e3..a72bd539939ef 100644
+index 43b0bf5faa7e3..096d358084eac 100644
 --- a/pkgs/development/ocaml-modules/xmlm/default.nix
 +++ b/pkgs/development/ocaml-modules/xmlm/default.nix
-@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
+@@ -17,7 +17,8 @@ stdenv.mkDerivation rec {
      sha256 = "1rrdxg5kh9zaqmgapy9bhdqyxbbvxxib3bdfg1vhw4rrkp1z0x8n";
    };
  
 -  buildInputs = [ ocaml findlib ocamlbuild topkg ];
-+  nativeBuildInputs = [ ocaml findlib ocamlbuild topkg ];
++  nativeBuildInputs = [ ocaml findlib ocamlbuild ];
++  buildInputs = [ topkg ];
  
    inherit (topkg) buildPhase installPhase;
  
+diff --git a/pkgs/development/ocaml-modules/z3/default.nix b/pkgs/development/ocaml-modules/z3/default.nix
+index 43fc5b245c8d8..dbdc2cfd8eeff 100644
+--- a/pkgs/development/ocaml-modules/z3/default.nix
++++ b/pkgs/development/ocaml-modules/z3/default.nix
+@@ -29,7 +29,7 @@ stdenv.mkDerivation {
+     runHook postInstall
+   '';
+ 
+-  buildInputs = [ findlib ];
++  nativeBuildInputs = [ findlib ];
+   propagatedBuildInputs = [ zarith ];
+ 
+   meta = z3.meta // {
