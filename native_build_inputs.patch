@@ -1,4 +1,4 @@
-From 7ec15881d669c2a58be4cde6ad907770e80e6e85 Mon Sep 17 00:00:00 2001
+From 361f34b4503c2fc74c26b290d1a2424819a73058 Mon Sep 17 00:00:00 2001
 From: Ulrik Strid <ulrik.strid@outlook.com>
 Date: Tue, 22 Feb 2022 10:59:04 +0100
 Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
@@ -11,6 +11,7 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  pkgs/development/ocaml-modules/bap/default.nix              | 5 ++---
  pkgs/development/ocaml-modules/batteries/default.nix        | 2 +-
  pkgs/development/ocaml-modules/benchmark/default.nix        | 3 ++-
+ pkgs/development/ocaml-modules/bigarray-overlap/default.nix | 4 +++-
  pkgs/development/ocaml-modules/biniou/1.0.nix               | 3 ++-
  pkgs/development/ocaml-modules/bitv/default.nix             | 2 +-
  pkgs/development/ocaml-modules/bolt/default.nix             | 3 ++-
@@ -21,12 +22,15 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  pkgs/development/ocaml-modules/camlzip/default.nix          | 2 +-
  pkgs/development/ocaml-modules/camomile/0.8.2.nix           | 3 ++-
  pkgs/development/ocaml-modules/camomile/0.8.5.nix           | 3 ++-
+ pkgs/development/ocaml-modules/carton/default.nix           | 4 +++-
  pkgs/development/ocaml-modules/cil/default.nix              | 2 +-
+ pkgs/development/ocaml-modules/coin/default.nix             | 2 +-
  pkgs/development/ocaml-modules/config-file/default.nix      | 3 ++-
  pkgs/development/ocaml-modules/cpdf/default.nix             | 3 ++-
  pkgs/development/ocaml-modules/cryptgps/default.nix         | 2 +-
  pkgs/development/ocaml-modules/csv/1.5.nix                  | 2 +-
  pkgs/development/ocaml-modules/ctypes/default.nix           | 4 ++--
+ pkgs/development/ocaml-modules/digestif/default.nix         | 2 ++
  pkgs/development/ocaml-modules/dolog/default.nix            | 2 +-
  pkgs/development/ocaml-modules/dum/default.nix              | 2 +-
  pkgs/development/ocaml-modules/dypgen/default.nix           | 2 +-
@@ -48,6 +52,7 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  pkgs/development/ocaml-modules/gg/default.nix               | 2 +-
  pkgs/development/ocaml-modules/gmetadom/default.nix         | 4 ++--
  pkgs/development/ocaml-modules/hacl-star/default.nix        | 2 +-
+ pkgs/development/ocaml-modules/hacl-star/raw.nix            | 2 +-
  pkgs/development/ocaml-modules/hmap/default.nix             | 3 ++-
  pkgs/development/ocaml-modules/inifiles/default.nix         | 2 +-
  pkgs/development/ocaml-modules/inotify/default.nix          | 3 ++-
@@ -127,12 +132,13 @@ Subject: [PATCH] ocamlPackages tree-wide: Move buildInputs that should be
  pkgs/development/ocaml-modules/uunf/default.nix             | 3 ++-
  pkgs/development/ocaml-modules/uuseg/default.nix            | 3 ++-
  pkgs/development/ocaml-modules/uutf/default.nix             | 2 +-
+ pkgs/development/ocaml-modules/uuuu/default.nix             | 2 +-
  pkgs/development/ocaml-modules/vg/default.nix               | 3 ++-
  pkgs/development/ocaml-modules/webbrowser/default.nix       | 4 ++--
  pkgs/development/ocaml-modules/xml-light/default.nix        | 2 +-
  pkgs/development/ocaml-modules/xmlm/default.nix             | 3 ++-
  pkgs/development/ocaml-modules/z3/default.nix               | 2 +-
- 127 files changed, 189 insertions(+), 153 deletions(-)
+ 133 files changed, 200 insertions(+), 158 deletions(-)
 
 diff --git a/pkgs/development/ocaml-modules/apron/default.nix b/pkgs/development/ocaml-modules/apron/default.nix
 index c9edfd62e06d9..44f71ceb542e1 100644
@@ -219,6 +225,23 @@ index 3397821319e32..a737920903ae2 100644
  
    createFindlibDestdir = true;
  
+diff --git a/pkgs/development/ocaml-modules/bigarray-overlap/default.nix b/pkgs/development/ocaml-modules/bigarray-overlap/default.nix
+index e02b1159a9c74..c63bc0b6ab901 100644
+--- a/pkgs/development/ocaml-modules/bigarray-overlap/default.nix
++++ b/pkgs/development/ocaml-modules/bigarray-overlap/default.nix
+@@ -14,9 +14,11 @@ buildDunePackage rec {
+   minimumOCamlVersion = "4.07";
+   useDune2 = true;
+ 
++
+   propagatedBuildInputs = [ bigarray-compat ];
+ 
+-  checkInputs = [ alcotest astring fpath bos findlib pkg-config ];
++  nativeBuildInputs = [ findlib pkg-config ];
++  checkInputs = [ alcotest astring fpath bos ];
+   doCheck = true;
+ 
+   meta = with lib; {
 diff --git a/pkgs/development/ocaml-modules/biniou/1.0.nix b/pkgs/development/ocaml-modules/biniou/1.0.nix
 index 795e634012901..52ceeb7372a74 100644
 --- a/pkgs/development/ocaml-modules/biniou/1.0.nix
@@ -354,6 +377,27 @@ index 67bd8b8c755d3..bc34185e987b5 100644
  
    createFindlibDestdir = true;
  
+diff --git a/pkgs/development/ocaml-modules/carton/default.nix b/pkgs/development/ocaml-modules/carton/default.nix
+index 97e00dc71b626..6868ddc7851c9 100644
+--- a/pkgs/development/ocaml-modules/carton/default.nix
++++ b/pkgs/development/ocaml-modules/carton/default.nix
+@@ -48,13 +48,15 @@ buildDunePackage rec {
+   ];
+ 
+   doCheck = true;
++  nativeBuildInputs = [
++    findlib
++  ];
+   checkInputs = [
+     base64
+     alcotest
+     alcotest-lwt
+     crowbar
+     lwt
+-    findlib
+     mirage-flow
+   ];
+ 
 diff --git a/pkgs/development/ocaml-modules/cil/default.nix b/pkgs/development/ocaml-modules/cil/default.nix
 index c5a3dcde22635..d2b9456b0de53 100644
 --- a/pkgs/development/ocaml-modules/cil/default.nix
@@ -367,6 +411,19 @@ index c5a3dcde22635..d2b9456b0de53 100644
  
    createFindlibDestdir = true;
  
+diff --git a/pkgs/development/ocaml-modules/coin/default.nix b/pkgs/development/ocaml-modules/coin/default.nix
+index f0697a9d880b9..a487309c6a49b 100644
+--- a/pkgs/development/ocaml-modules/coin/default.nix
++++ b/pkgs/development/ocaml-modules/coin/default.nix
+@@ -24,7 +24,7 @@ buildDunePackage rec {
+ 
+   useDune2 = true;
+ 
+-  nativeBuildInputs = [ menhir ];
++  nativeBuildInputs = [ menhir findlib ];
+ 
+   checkInputs = [ re ];
+   doCheck = true;
 diff --git a/pkgs/development/ocaml-modules/config-file/default.nix b/pkgs/development/ocaml-modules/config-file/default.nix
 index c408d1a392f1c..fdc6ad453cbc8 100644
 --- a/pkgs/development/ocaml-modules/config-file/default.nix
@@ -436,6 +493,19 @@ index 8c20a68c2746f..46da4941bd419 100644
    propagatedBuildInputs = [ integers libffi bigarray-compat ];
  
    buildPhase = ''
+diff --git a/pkgs/development/ocaml-modules/digestif/default.nix b/pkgs/development/ocaml-modules/digestif/default.nix
+index 2ddaec5c7c1d7..2c3455af2fa0c 100644
+--- a/pkgs/development/ocaml-modules/digestif/default.nix
++++ b/pkgs/development/ocaml-modules/digestif/default.nix
+@@ -14,6 +14,8 @@ buildDunePackage rec {
+     sha256 = "01gwkbrznci4xdcbww4ysgsciz2qs0r8jsmhp0siwbcgcrf1jjv5";
+   };
+ 
++  nativeBuildInputs = [ findlib ];
++
+   propagatedBuildInputs = [ bigarray-compat eqaf stdlib-shims ];
+ 
+   checkInputs = [ alcotest astring bos fpath ];
 diff --git a/pkgs/development/ocaml-modules/dolog/default.nix b/pkgs/development/ocaml-modules/dolog/default.nix
 index 64fb2b2c5a59b..99ad976a05af1 100644
 --- a/pkgs/development/ocaml-modules/dolog/default.nix
@@ -727,6 +797,19 @@ index 8a29439c7a599..d8c3593a7c883 100644
      cppo
    ];
  }
+diff --git a/pkgs/development/ocaml-modules/hacl-star/raw.nix b/pkgs/development/ocaml-modules/hacl-star/raw.nix
+index c7852338253ce..897f7b9e928cc 100644
+--- a/pkgs/development/ocaml-modules/hacl-star/raw.nix
++++ b/pkgs/development/ocaml-modules/hacl-star/raw.nix
+@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
+   dontAddStaticConfigureFlags = true;
+   configurePlatforms = [];
+ 
+-  buildInputs = [
++  nativeBuildInputs = [
+     which
+     ocaml
+     findlib
 diff --git a/pkgs/development/ocaml-modules/hmap/default.nix b/pkgs/development/ocaml-modules/hmap/default.nix
 index 67622a8ef6a0f..5f6c81591054d 100644
 --- a/pkgs/development/ocaml-modules/hmap/default.nix
@@ -1824,6 +1907,19 @@ index e8179e369afa0..6dce2a6013cf4 100644
    propagatedBuildInputs = [ uchar ];
  
    inherit (topkg) buildPhase installPhase;
+diff --git a/pkgs/development/ocaml-modules/uuuu/default.nix b/pkgs/development/ocaml-modules/uuuu/default.nix
+index 7d2eaac181df1..30f28ac750ba8 100644
+--- a/pkgs/development/ocaml-modules/uuuu/default.nix
++++ b/pkgs/development/ocaml-modules/uuuu/default.nix
+@@ -24,7 +24,7 @@ buildDunePackage rec {
+ 
+   useDune2 = true;
+ 
+-  nativeBuildInputs = [ menhir ];
++  nativeBuildInputs = [ menhir findlib ];
+ 
+   buildInputs = [ angstrom ];
+ 
 diff --git a/pkgs/development/ocaml-modules/vg/default.nix b/pkgs/development/ocaml-modules/vg/default.nix
 index a9a4c0d3d6b42..3b706485581fe 100644
 --- a/pkgs/development/ocaml-modules/vg/default.nix
