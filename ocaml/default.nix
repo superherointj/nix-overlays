@@ -675,6 +675,11 @@ with oself;
   mirage-crypto-rng = osuper.mirage-crypto-rng.overrideAttrs (o: {
     buildInputs = [ dune-configurator ];
   });
+  mirage-crypto-ec = osuper.mirage-crypto-ec.overrideAttrs (o: {
+    PKG_CONFIG_PATH = "${pkg-config}/bin/pkg-config";
+  });
+
+  
 
   mustache = osuper.mustache.overrideAttrs (o: {
     src = builtins.fetchurl {
