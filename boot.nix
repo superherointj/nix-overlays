@@ -15,6 +15,7 @@ let
       };
   channel = patchChannel system (import ./sources.nix) [
     ./native_build_inputs.patch
+    ./coq.patch
     # ./dune_strict_deps.patch
   ];
 
