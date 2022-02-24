@@ -13,7 +13,9 @@ let
         src = channel;
         patches = patches;
       };
-  channel = patchChannel system (import ./sources.nix) patches;
+  channel = patchChannel system (import ./sources.nix) [
+    ./coq.patch
+  ];
 
 in
 
