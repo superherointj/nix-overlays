@@ -15,6 +15,6 @@
     legacyPackages = self.packages."${system}";
     makePkgs = attrs: import ./boot.nix attrs;
 
-    hydraJobs = import ./hydra.nix;
+    hydraJobs = import ./hydra.nix { pkgs = packages; };
   }));
 }
