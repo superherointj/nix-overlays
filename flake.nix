@@ -25,9 +25,8 @@
         allowUnfree = true;
       };
     };
-    legacyPackages = self.packages."${system}";
+    legacyPackages = pkgs."${system}";
     makePkgs = attrs: import ./boot.nix attrs;
-
     hydraJobs = import ./hydra.nix { inherit pkgs; };
   }));
 }

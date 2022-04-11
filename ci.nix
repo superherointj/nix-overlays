@@ -234,7 +234,8 @@ with pkgs;
 
 {
   native =
-    lib.attrValues (buildCandidates pkgs)
+    lib.attrValues (buildCandidates pkgs);
+    /*
     ++ [
       # cockroachdb-21_1_x cockroachdb-21_2_x
       cockroachdb-22_x
@@ -243,6 +244,7 @@ with pkgs;
       esy
     ]
     ++ lib.optional stdenv.isLinux [ kubernetes ];
+    */
 
 
   musl = crossTarget pkgs.pkgsCross.musl64;

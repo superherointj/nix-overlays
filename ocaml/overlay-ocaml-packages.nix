@@ -21,12 +21,9 @@ let
   newOCamlScope = { major_version, minor_version, patch_version, src, ... }@extraOpts:
     super.ocaml-ng.ocamlPackages_4_13.overrideScope'
       (oself: osuper:
-        let
-          sources = "${import ../sources.nix}/pkgs/development/compilers/ocaml/generic.nix";
-        in
         {
           ocaml = (callPackage
-            (import sources {
+            (import ./generic-ocaml.nix {
               inherit major_version minor_version patch_version;
             })
             { }).overrideAttrs (_: { inherit src; } // extraOpts);
