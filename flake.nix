@@ -5,7 +5,7 @@
 
   outputs = { self, flake-utils }: ({
     overlay = final: prev: (import ./default.nix) final prev;
-  } // flake-utils.lib.eachDefaultSystem (system: {
+  } // flake-utils.lib.eachDefaultSystem (system: rec {
     packages = import ./boot.nix {
       inherit system;
       config = {
