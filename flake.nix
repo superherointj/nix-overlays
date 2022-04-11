@@ -1,16 +1,23 @@
 {
   description = "ocaml-packages-overlay";
 
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixpkgs.url ="github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
-  outputs = { self, nixpkgs, flake-utils }: 
+  outputs = { self, nixpkgs, gitignore, flake-utils }: 
   let overlay = final: prev: (import ./default.nix) final prev; in
   ({
     inherit overlay;  
   } // flake-utils.lib.eachDefaultSystem (system: rec {
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ overlay ];
+      overlays = [ gitignore.overlay overlay ];
     };
     packages = import ./boot.nix {
       inherit system;
