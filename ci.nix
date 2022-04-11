@@ -160,6 +160,7 @@ let
     # Incompatible with 4.14
     "pcap-format"
     "eliom"
+    "ocsigenserver"
     "ocsigen_server"
     "ocsigen-toolkit"
     "ocsipersist"
