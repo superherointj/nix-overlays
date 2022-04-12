@@ -234,7 +234,7 @@ with pkgs;
 
 {
   native =
-    lib.attrValues (buildCandidates pkgs);
+    (buildCandidates pkgs);
     /*
     ++ [
       # cockroachdb-21_1_x cockroachdb-21_2_x
