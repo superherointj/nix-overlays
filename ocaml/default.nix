@@ -455,6 +455,13 @@ with oself;
     };
   });
 
+  findlib = osuper.findlib.overrideAttrs (o: {
+    src = builtins.fetchurl {
+      url = "http://download.camlcity.org/download/findlib-${o.version}.tar.gz";
+      sha256 = "0hfcwamcvinmww59b5i4yxbf0kxyzkp5qv3d1c7ybn9q52vgq463";
+    };
+  });
+
   ff-pbt = osuper.ff-pbt.overrideAttrs (o: {
     propagatedBuildInputs = o.propagatedBuildInputs ++ [ alcotest ];
   });
