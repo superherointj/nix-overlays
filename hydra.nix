@@ -197,22 +197,44 @@ let
     "git-cohttp"
     "git-cohttp-unix"
   ];
-  remove_fns = packages: (builtins.removeAttrs packages ([
+  functions = [
     "newScope"
     "callPackage"
     "overrideScope"
     "overrideScope'"
     "packages"
-  ] ++ ignoredPackages));
+  ];
+  inherit (pkgs) lib;
+  buildCandidates = pkgs: ocamlVersion:
+    let
+      ocamlPackages = pkgs.ocaml-ng."ocamlPackages_${ocamlVersion}";
+    in
+    lib.filterAttrs
+      (n: v:
+        let broken =
+          if v ? meta && v.meta ? broken then v.meta.broken else false;
+        in
+        # don't build tezos stuff
+        (! ((builtins.substring 0 5 n) == "tezos")) &&
+        (! (builtins.elem n ignoredPackages)) &&
+        (! (builtins.elem n ignoredPackages)) &&
+        lib.isDerivation v &&
+        (! broken) &&
+        (
+          let platforms = (if ((v ? meta) && v.meta ? platforms) then v.meta.platforms else lib.platforms.all);
+          in
+          (builtins.elem system platforms)
+        ))
+      ocamlPackages;
 in
 
 {
-  build_4_12 = remove_fns pkgs.ocaml-ng.ocamlPackages_4_12;
-  build_4_13 = remove_fns pkgs.ocaml-ng.ocamlPackages_4_13;
-  build_4_14 = remove_fns pkgs.ocaml-ng.ocamlPackages_4_14;
-  build_5_00 = remove_fns pkgs.ocaml-ng.ocamlPackages_5_00;
+  build_4_12 = buildCandidates pkgs "4_12";
+  build_4_13 = buildCandidates pkgs "4_13";
+  build_4_14 = buildCandidates pkgs "4_14";
+  build_5_00 = buildCandidates pkgs "5_00";
 
-  arm64_4_13 = remove_fns (if system != "aarch64-darwin" then
+  arm64_4_13 = (if system != "aarch64-darwin" then
     with pkgs.pkgsCross.aarch64-multiplatform-musl.ocaml-ng.ocamlPackages_4_13; {
       inherit piaf carl caqti-driver-postgresql ppx_deriving;
       carl_static = (carl.override { static = true; });
@@ -220,7 +242,7 @@ in
   else
     {});
 
-  musl_4_13 = remove_fns (if system != "aarch64-darwin" then
+  musl_4_13 =  (if system != "aarch64-darwin" then
     with pkgs.pkgsCross.musl64.ocaml-ng.ocamlPackages_4_13; {
       inherit piaf carl caqti-driver-postgresql ppx_deriving;
       carl_static = (carl.override { static = true; });

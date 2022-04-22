@@ -21,8 +21,8 @@
     ({
       inherit overlay;
       hydraJobs = {
-        x86_64-linux = remove_fns (import ./hydra.nix { pkgs = self.pkgs.x86_64-linux; system = "x86_64-linux"; });
-        aarch64-darwin = remove_fns (import ./hydra.nix { pkgs = self.pkgs.aarch64-darwin; system = "aarch64-darwin"; });
+        x86_64-linux = (import ./hydra.nix { pkgs = self.pkgs.x86_64-linux; system = "x86_64-linux"; });
+        aarch64-darwin = (import ./hydra.nix { pkgs = self.pkgs.aarch64-darwin; system = "aarch64-darwin"; });
       };
     } // flake-utils.lib.eachDefaultSystem (system: rec {
       pkgs = import nixpkgs {
